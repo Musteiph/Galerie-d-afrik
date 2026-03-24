@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galérie d'Afrik</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Crimson+Pro:wght@300;400;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#C9922A;--gold-light:#E8B84B;--earth:#3D2B1F;--earth-mid:#6B4226;--cream:#F5EDD8;--cream-dark:#EAD9B8;--terracotta:#B85C38;--kente:#2A5C45;--text-dark:#1A1008;--text-mid:#4A3728;--white:#FFFDF7}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Crimson Pro',Georgia,serif;background:var(--cream);color:var(--text-dark);overflow-x:hidden}
+
+/* HAMBURGER */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;z-index:200}
+.hamburger span{display:block;width:26px;height:2px;background:var(–cream);border-radius:2px;transition:all .3s}
+.hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:500;padding:18px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(61,43,31,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,146,42,.25);transition:padding .3s}
+.nav-logo{font-family:‘Cormorant Garamond’,serif;font-size:26px;font-weight:600;color:var(–gold-light);letter-spacing:2px;text-decoration:none;flex-shrink:0}
+.nav-logo span{color:var(–cream);font-style:italic;font-weight:300}
+.nav-right{display:flex;align-items:center;gap:28px}
+.nav-links{display:flex;gap:22px;list-style:none}
+.nav-links a{color:var(–cream);text-decoration:none;font-family:‘Montserrat’,sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;opacity:.85;transition:opacity .2s,color .2s}
+.nav-links a:hover{opacity:1;color:var(–gold-light)}
+.nav-cta{background:var(–gold)!important;color:var(–earth)!important;padding:9px 20px!important;border-radius:2px;opacity:1!important;font-weight:600!important}
+.nav-cta:hover{background:var(–gold-light)!important}
+.lang-btn{font-family:‘Montserrat’,sans-serif;font-size:11px;font-weight:600;background:rgba(201,146,42,.2);border:1px solid var(–gold);color:var(–gold-light);padding:6px 12px;border-radius:20px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.lang-btn:hover{background:var(–gold);color:var(–earth)}
+
+/* MOBILE MENU */
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(61,43,31,.99);z-index:490;flex-direction:column;align-items:center;justify-content:center;gap:26px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(–cream);text-decoration:none;font-family:‘Cormorant Garamond’,serif;font-size:30px;font-weight:300;transition:color .2s}
+.mobile-menu a:hover{color:var(–gold-light)}
+
+/* HERO */
+#hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;background:var(–earth)}
+#hero-bg{position:absolute;inset:0;background-size:cover;background-position:center center;background-repeat:no-repeat;transition:background-size .3s,background-position .3s}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(105deg,rgba(61,43,31,.83) 45%,rgba(61,43,31,.3) 100%);z-index:1}
+.hero-pattern{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,transparent,transparent 30px,rgba(201,146,42,.04) 30px,rgba(201,146,42,.04) 31px);z-index:1}
+.hero-content{position:relative;z-index:2;max-width:700px;padding:140px 80px 80px}
+.hero-eyebrow{font-family:‘Montserrat’,sans-serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(–gold-light);margin-bottom:24px;animation:fadeUp .8s .2s both}
+.hero-title{font-family:‘Cormorant Garamond’,serif;font-size:clamp(36px,6vw,70px);font-weight:300;line-height:1.15;color:var(–cream);margin-bottom:28px;animation:fadeUp .8s .4s both}
+.hero-title em{color:var(–gold-light);font-style:italic}
+.hero-subtitle{font-family:‘Crimson Pro’,serif;font-size:clamp(15px,2vw,19px);font-weight:300;line-height:1.7;color:rgba(245,237,216,.85);margin-bottom:44px;max-width:520px;animation:fadeUp .8s .6s both}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .8s .8s both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.btn-primary{background:var(–gold);color:var(–earth);padding:15px 36px;font-family:‘Montserrat’,sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border-radius:2px;display:inline-block;transition:all .3s;border:none;cursor:pointer}
+.btn-primary:hover{background:var(–gold-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,146,42,.35)}
+.btn-outline{background:transparent;color:var(–cream);padding:14px 36px;font-family:‘Montserrat’,sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border-radius:2px;border:1px solid rgba(245,237,216,.45);display:inline-block;transition:all .3s}
+.btn-outline:hover{border-color:var(–gold-light);color:var(–gold-light)}
+.hero-badge{position:absolute;right:80px;bottom:80px;width:115px;height:115px;border-radius:50%;background:var(–gold);display:flex;align-items:center;justify-content:center;text-align:center;font-family:‘Cormorant Garamond’,serif;font-size:13px;line-height:1.4;color:var(–earth);font-weight:600;animation:spin 20s linear infinite;z-index:2}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-badge-inner{animation:spin 20s linear infinite reverse;padding:12px}
+
+/* SECTIONS */
+section{padding:88px 80px}
+.section-label{font-family:‘Montserrat’,sans-serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(–gold);margin-bottom:16px}
+.section-title{font-family:‘Cormorant Garamond’,serif;font-size:clamp(30px,4vw,50px);font-weight:300;line-height:1.2;color:var(–earth);margin-bottom:20px}
+.section-title em{font-style:italic;color:var(–terracotta)}
+.divider{width:60px;height:2px;background:linear-gradient(90deg,var(–gold),transparent);margin-bottom:24px}
+
+/* WHY US */
+#why-us{background:var(–earth);position:relative;overflow:hidden}
+#why-us::before{content:’’;position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(201,146,42,.03) 40px,rgba(201,146,42,.03) 41px)}
+.why-inner{position:relative;z-index:1}
+#why-us .section-title{color:var(–cream)}
+#why-us .section-label{color:var(–gold-light)}
+#why-us .divider{background:linear-gradient(90deg,var(–gold-light),transparent)}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
+.why-card{padding:34px;border:1px solid rgba(201,146,42,.2);border-radius:4px;transition:all .4s;background:rgba(255,255,255,.03)}
+.why-card:hover{border-color:var(–gold);background:rgba(201,146,42,.07);transform:translateY(-4px)}
+.why-icon{font-size:34px;margin-bottom:18px;display:block}
+.why-card h3{font-family:‘Cormorant Garamond’,serif;font-size:23px;font-weight:600;color:var(–gold-light);margin-bottom:11px}
+.why-card p{font-size:16px;line-height:1.7;color:rgba(245,237,216,.75);font-weight:300}
+
+/* VITRINE */
+#vitrine{background:var(–cream);padding:88px 0}
+.vitrine-inner{display:grid;grid-template-columns:1fr 1fr;min-height:560px;max-width:1400px;margin:0 auto}
+.vitrine-img-wrap{position:relative;overflow:hidden;background:var(–earth-mid)}
+#vitrine-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .6s ease}
+.vitrine-img-wrap:hover #vitrine-img{transform:scale(1.04)}
+.vitrine-overlay2{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(61,43,31,.65));padding:34px}
+.vitrine-tag{background:var(–gold);color:var(–earth);font-family:‘Montserrat’,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;display:inline-block;border-radius:2px}
+.vitrine-content{background:var(–earth);padding:66px 56px;display:flex;flex-direction:column;justify-content:center}
+.vitrine-content .section-title{color:var(–cream)}
+.vitrine-content .section-label{color:var(–gold-light)}
+.vitrine-content .divider{background:linear-gradient(90deg,var(–gold-light),transparent)}
+.vitrine-desc{font-size:18px;line-height:1.8;color:rgba(245,237,216,.8);font-weight:300;margin-bottom:30px;font-style:italic}
+.vitrine-features{display:flex;flex-direction:column;gap:11px;margin-bottom:34px}
+.vitrine-feature{display:flex;align-items:center;gap:12px;font-family:‘Montserrat’,sans-serif;font-size:12px;color:rgba(245,237,216,.7);letter-spacing:1px}
+.vitrine-feature::before{content:’’;width:6px;height:6px;background:var(–gold);border-radius:50%;flex-shrink:0}
+
+/* PRODUCTS */
+#products{background:var(–white);text-align:center}
+.products-header{margin-bottom:52px}
+.products-header .section-label,.products-header .divider{margin:0 auto 16px}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:1200px;margin:0 auto}
+.product-card{background:var(–cream);border-radius:4px;overflow:hidden;transition:all .4s;text-align:left}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(61,43,31,.2)}
+.product-img-wrapper{position:relative;overflow:hidden;aspect-ratio:3/4;background:var(–cream-dark)}
+.product-img-wrapper img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.product-card:hover .product-img-wrapper img{transform:scale(1.06)}
+.product-badge{position:absolute;top:13px;left:13px;background:var(–terracotta);color:#fff;font-family:‘Montserrat’,sans-serif;font-size:10px;font-weight:600;letter-spacing:1px;padding:4px 9px;border-radius:2px}
+.product-info{padding:20px}
+.product-category{font-family:‘Montserrat’,sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(–gold);margin-bottom:6px}
+.product-name{font-family:‘Cormorant Garamond’,serif;font-size:20px;font-weight:600;color:var(–earth);margin-bottom:6px}
+.product-price{font-family:‘Montserrat’,sans-serif;font-size:14px;font-weight:600;color:var(–terracotta);margin-bottom:13px}
+.product-btn{display:block;text-align:center;background:var(–earth);color:var(–cream);padding:10px;font-family:‘Montserrat’,sans-serif;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;border-radius:2px;transition:background .2s;cursor:pointer;border:none;width:100%}
+.product-btn:hover{background:var(–gold);color:var(–earth)}
+/* img placeholder */
+.img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(–cream-dark),var(–cream));color:var(–earth-mid);font-family:‘Montserrat’,sans-serif;font-size:11px;letter-spacing:1px;text-align:center;padding:20px}
+
+/* TESTIMONIAL */
+#testimonial{background:linear-gradient(135deg,var(–earth) 0%,#2A1A10 100%);text-align:center;position:relative;overflow:hidden}
+#testimonial::before{content:’\201C’;position:absolute;top:-40px;left:50%;transform:translateX(-50%);font-family:‘Cormorant Garamond’,serif;font-size:260px;color:rgba(201,146,42,.06);line-height:1}
+.testimonial-stars{font-size:20px;color:var(–gold);margin-bottom:26px;letter-spacing:4px}
+.testimonial-quote{font-family:‘Cormorant Garamond’,serif;font-size:clamp(19px,2.8vw,29px);font-weight:300;font-style:italic;color:var(–cream);line-height:1.7;max-width:780px;margin:0 auto 30px;position:relative;z-index:1}
+.testimonial-author{font-family:‘Montserrat’,sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(–gold-light);font-weight:500}
+.shipping-banner{margin-top:60px;padding-top:44px;border-top:1px solid rgba(201,146,42,.2);display:flex;justify-content:center;gap:50px;flex-wrap:wrap}
+.shipping-item{display:flex;align-items:center;gap:12px;color:rgba(245,237,216,.8);font-family:‘Crimson Pro’,serif;font-size:16px}
+.shipping-icon{font-size:24px}
+
+/* COMMANDE */
+#commande{background:var(–cream-dark)}
+.commande-inner{max-width:680px;margin:0 auto;text-align:center}
+.commande-inner .section-title{color:var(–earth)}
+.commande-inner .divider{margin:0 auto 20px}
+.commande-intro{font-size:17px;color:var(–text-mid);line-height:1.7;margin-bottom:40px;font-weight:300}
+.order-form{text-align:left}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group.full{grid-column:1/-1}
+.form-group label{font-family:‘Montserrat’,sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(–earth-mid);font-weight:600}
+.form-group input,.form-group textarea,.form-group select{padding:12px 14px;background:var(–white);border:1px solid rgba(61,43,31,.2);border-radius:3px;font-family:‘Crimson Pro’,serif;font-size:16px;color:var(–text-dark);transition:border .2s;appearance:none;-webkit-appearance:none}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(–gold);box-shadow:0 0 0 3px rgba(201,146,42,.12)}
+.form-group textarea{min-height:105px;resize:vertical}
+.form-submit{text-align:center;margin-top:26px}
+
+/* FOOTER */
+footer{background:#160E07;color:rgba(245,237,216,.6);padding:60px 80px 34px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:46px;margin-bottom:52px}
+.footer-brand .nav-logo{display:block;margin-bottom:14px;text-decoration:none}
+.footer-brand p{font-size:15px;line-height:1.7;font-weight:300}
+.footer-socials{display:flex;gap:11px;margin-top:20px}
+.social-link{width:38px;height:38px;background:rgba(201,146,42,.15);border:1px solid rgba(201,146,42,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(–gold-light);font-size:14px;transition:all .3s}
+.social-link:hover{background:var(–gold);color:var(–earth);border-color:var(–gold)}
+.footer-col h4{font-family:‘Montserrat’,sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(–gold);margin-bottom:16px;font-weight:600}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.footer-col ul a{color:rgba(245,237,216,.6);text-decoration:none;font-size:14px;transition:color .2s}
+.footer-col ul a:hover{color:var(–gold-light)}
+.footer-bottom{border-top:1px solid rgba(201,146,42,.15);padding-top:26px;display:flex;justify-content:space-between;align-items:center;font-family:‘Montserrat’,sans-serif;font-size:11px;letter-spacing:1px}
+
+/* ====== ADMIN ====== */
+#admin-toggle{position:fixed;bottom:20px;right:20px;z-index:9999;background:var(–earth);color:var(–gold-light);border:2px solid var(–gold);border-radius:50px;padding:10px 18px;font-family:‘Montserrat’,sans-serif;font-size:12px;font-weight:600;letter-spacing:1px;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.5);transition:all .3s}
+#admin-toggle:hover{background:var(–gold);color:var(–earth)}
+#admin-panel{display:none;position:fixed;top:0;right:0;width:360px;height:100vh;background:#180C06;color:var(–cream);z-index:9998;overflow-y:auto;box-shadow:-8px 0 40px rgba(0,0,0,.8);padding:20px 16px;font-family:‘Montserrat’,sans-serif}
+#admin-panel.open{display:block;animation:slideIn .3s ease}
+@keyframes slideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
+.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(201,146,42,.35)}
+.admin-header h2{font-size:13px;color:var(–gold-light);letter-spacing:2px;font-weight:700}
+.admin-close{background:none;border:none;color:var(–cream);font-size:20px;cursor:pointer;opacity:.7}
+.admin-close:hover{opacity:1}
+.admin-tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-bottom:14px}
+.admin-tab{padding:7px 3px;background:rgba(255,255,255,.06);border:1px solid rgba(201,146,42,.18);color:rgba(245,237,216,.5);font-size:9px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:all .2s;text-align:center}
+.admin-tab.active{background:var(–gold);color:var(–earth);border-color:var(–gold)}
+.admin-tab-content{display:none}
+.admin-tab-content.active{display:block}
+.admin-section{margin-bottom:16px}
+.admin-section h3{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(–gold);margin-bottom:9px;font-weight:700;padding-bottom:5px;border-bottom:1px solid rgba(201,146,42,.15)}
+.admin-field{margin-bottom:9px}
+.admin-field label{display:block;font-size:9px;color:rgba(245,237,216,.58);margin-bottom:4px;letter-spacing:.5px}
+.admin-field input[type=text],.admin-field textarea,.admin-field select{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(201,146,42,.22);color:var(–cream);padding:7px 9px;border-radius:3px;font-family:‘Montserrat’,sans-serif;font-size:11px;transition:border .2s}
+.admin-field input[type=text]:focus,.admin-field textarea:focus{outline:none;border-color:var(–gold-light)}
+.admin-field textarea{min-height:58px;resize:vertical}
+.admin-field input[type=color]{height:34px;width:100%;padding:2px;cursor:pointer;border-radius:3px;border:1px solid rgba(201,146,42,.22)}
+.size-controls{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.admin-btn{width:100%;padding:9px;background:var(–gold);color:var(–earth);border:none;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase;transition:background .2s;margin-top:4px;font-family:‘Montserrat’,sans-serif}
+.admin-btn:hover{background:var(–gold-light)}
+.admin-btn.green{background:var(–kente)}
+.admin-btn.green:hover{background:#3a7a5c}
+.admin-btn.outline{background:transparent;border:1px solid var(–gold);color:var(–gold);margin-top:6px}
+.admin-btn.outline:hover{background:rgba(201,146,42,.15)}
+.text-item{background:rgba(255,255,255,.05);border:1px solid rgba(201,146,42,.13);border-radius:3px;padding:9px;margin-bottom:8px}
+.text-item-label{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(–gold);margin-bottom:5px;font-weight:700}
+.text-item textarea{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(201,146,42,.18);color:var(–cream);padding:6px 8px;border-radius:3px;font-size:11px;resize:vertical;min-height:48px;line-height:1.5;font-family:‘Montserrat’,sans-serif}
+.text-item textarea:focus{outline:none;border-color:var(–gold-light)}
+.tap-btn{margin-top:5px;width:100%;padding:6px;background:rgba(201,146,42,.2);color:var(–gold-light);border:none;border-radius:3px;font-size:9px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:background .2s;font-family:‘Montserrat’,sans-serif}
+.tap-btn:hover{background:rgba(201,146,42,.4)}
+/* IMAGE UPLOAD ZONE */
+.img-upload-zone{border:2px dashed rgba(201,146,42,.35);border-radius:6px;padding:16px;text-align:center;cursor:pointer;transition:all .25s;position:relative;margin-bottom:8px}
+.img-upload-zone:hover,.img-upload-zone.dragover{border-color:var(–gold-light);background:rgba(201,146,42,.08)}
+.img-upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.img-upload-zone .upload-icon{font-size:28px;display:block;margin-bottom:6px}
+.img-upload-zone p{font-size:10px;color:rgba(245,237,216,.6);line-height:1.5}
+.img-preview{width:100%;height:90px;object-fit:cover;border-radius:4px;display:none;margin-bottom:6px;border:1px solid rgba(201,146,42,.25)}
+.img-status{font-size:9px;color:rgba(245,237,216,.5);text-align:center;margin-top:4px;min-height:14px}
+.img-status.ok{color:#6fcf97}
+.img-status.err{color:#eb5757}
+/* SLIDERS */
+.slider-row{display:flex;align-items:center;gap:8px;margin-top:5px}
+.slider-row label{font-size:9px;color:rgba(245,237,216,.55);white-space:nowrap;width:110px;flex-shrink:0}
+.slider-row input[type=range]{flex:1;accent-color:var(–gold);height:3px}
+.slider-row span{font-size:10px;color:var(–gold-light);min-width:38px;text-align:right}
+
+/* MODAL */
+#order-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:10000;align-items:center;justify-content:center;padding:20px}
+.modal-box{background:var(–cream);max-width:440px;width:100%;padding:52px 40px;text-align:center;border-radius:4px}
+.modal-box .moji{font-size:46px;margin-bottom:16px}
+.modal-box h3{font-family:‘Cormorant Garamond’,serif;font-size:28px;color:var(–earth);margin-bottom:11px}
+.modal-box p{font-size:15px;color:var(–text-mid);line-height:1.7;margin-bottom:26px}
+
+/* RESPONSIVE */
+@media(max-width:1100px){nav{padding:16px 28px}section{padding:70px 36px}.hero-content{padding:120px 36px 66px}.why-grid{grid-template-columns:1fr 1fr}.vitrine-inner{grid-template-columns:1fr}.vitrine-content{padding:46px 36px}.footer-grid{grid-template-columns:1fr 1fr}.hero-badge{right:36px;bottom:36px}#admin-panel{width:320px}}
+@media(max-width:768px){.hamburger{display:flex}.nav-right{display:none}nav{padding:13px 18px}section{padding:52px 18px}.hero-content{padding:100px 18px 55px}.hero-badge{display:none}.why-grid{grid-template-columns:1fr}.vitrine-content{padding:36px 20px}.products-grid{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;gap:9px;text-align:center}footer{padding:46px 20px 28px}.shipping-banner{gap:22px}#admin-panel{width:100%}}
+@media(max-width:480px){.products-grid{grid-template-columns:1fr}.hero-actions{flex-direction:column}.btn-primary,.btn-outline{text-align:center;width:100%}}
+</style>
+
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#why-us" onclick="closeMobile()" data-i18n="nav_why">Notre Philosophie</a>
+  <a href="#vitrine" onclick="closeMobile()" data-i18n="nav_collection">Collection</a>
+  <a href="#products" onclick="closeMobile()" data-i18n="nav_shop">Boutique</a>
+  <a href="#commande" onclick="closeMobile()" data-i18n="nav_order">Commander</a>
+  <button class="lang-btn" onclick="toggleLang();closeMobile()" id="mlang">🌐 English</button>
+</div>
+
+<!-- NAV -->
+
+<nav id="main-nav">
+  <a href="#" class="nav-logo">Galérie <span>d'Afrik</span></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#why-us" data-i18n="nav_why">Notre Philosophie</a></li>
+      <li><a href="#vitrine" data-i18n="nav_collection">Collection</a></li>
+      <li><a href="#products" data-i18n="nav_shop">Boutique</a></li>
+      <li><a href="#commande" class="nav-cta" data-i18n="nav_order">Commander</a></li>
+    </ul>
+    <button class="lang-btn" onclick="toggleLang()" id="lang-btn">🌐 English</button>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+
+<section id="hero">
+  <div id="hero-bg"></div>
+  <div class="hero-overlay" id="hero-overlay"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow" id="txt-eyebrow">Galérie d'Afrik — Depuis 2020</p>
+    <h1 class="hero-title">
+      <span id="txt-hero-line1">L'authenticité africaine,</span><br>
+      <em id="txt-hero-em">réinventée pour votre quotidien.</em>
+    </h1>
+    <p class="hero-subtitle" id="txt-hero-sub">Découvrez notre collection exclusive d'accessoires artisanaux : des sacs Kaba aux parures traditionnelles, portez une histoire.</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary" id="txt-cta1">Découvrir la Collection</a>
+      <a href="#commande" class="btn-outline" id="txt-cta2">Passer Commande</a>
+    </div>
+  </div>
+  <div class="hero-badge"><div class="hero-badge-inner" id="txt-badge">100%<br>Fait Main</div></div>
+</section>
+
+<!-- WHY US -->
+
+<section id="why-us">
+  <div class="why-inner">
+    <div class="section-label" id="txt-why-label">Notre Philosophie</div>
+    <h2 class="section-title" id="txt-why-title">Pourquoi <em>nous choisir</em> ?</h2>
+    <div class="divider"></div>
+    <div class="why-grid">
+      <div class="why-card"><span class="why-icon">🤲</span><h3 id="txt-w1t">Fait Main</h3><p id="txt-w1b">Chaque pièce est unique, confectionnée avec passion par des artisans locaux qui transmettent un savoir-faire ancestral de génération en génération.</p></div>
+      <div class="why-card"><span class="why-icon">🌿</span><h3 id="txt-w2t">Matériaux Nobles</h3><p id="txt-w2b">Nous utilisons des tissus et matériaux authentiques pour une durabilité garantie. Chaque fibre raconte l'histoire de notre terre et de ses richesses.</p></div>
+      <div class="why-card"><span class="why-icon">✨</span><h3 id="txt-w3t">Style Intemporel</h3><p id="txt-w3b">Un mélange parfait entre tradition et modernité, adaptable à toutes vos tenues. Nos créations transcendent les tendances et s'inscrivent dans la durée.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- VITRINE -->
+
+<section id="vitrine">
+  <div class="vitrine-inner">
+    <div class="vitrine-img-wrap">
+      <img id="vitrine-img" src="" alt="Collection Phare" style="display:none">
+      <div id="vitrine-placeholder" class="img-placeholder" style="min-height:400px">🖼<br><br>Ajoutez une image<br>depuis le panneau Admin</div>
+      <div class="vitrine-overlay2"><span class="vitrine-tag" id="txt-vtag">Collection Signature</span></div>
+    </div>
+    <div class="vitrine-content">
+      <div class="section-label" id="txt-vlabel">La Pièce Maîtresse</div>
+      <h2 class="section-title" id="txt-vtitle">Plus qu'un accessoire,<br><em>une identité.</em></h2>
+      <div class="divider"></div>
+      <p class="vitrine-desc" id="txt-vdesc">"Nos créations célèbrent le savoir-faire ivoirien avec une touche contemporaine. Chaque pièce est une œuvre d'art portée."</p>
+      <div class="vitrine-features">
+        <div class="vitrine-feature" id="txt-f1">Tissage traditionnel Kente &amp; Bogolan</div>
+        <div class="vitrine-feature" id="txt-f2">Teintures naturelles végétales</div>
+        <div class="vitrine-feature" id="txt-f3">Finitions cousues main</div>
+        <div class="vitrine-feature" id="txt-f4">Certificat d'authenticité inclus</div>
+      </div>
+      <a href="#commande" class="btn-primary" id="txt-vbtn">Commander cette pièce</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+
+<section id="products">
+  <div class="products-header">
+    <div class="section-label" id="txt-shoplabel">Notre Boutique</div>
+    <h2 class="section-title" style="text-align:center" id="txt-shoptitle">La <em>Collection</em></h2>
+    <div class="divider" style="margin:0 auto 20px"></div>
+    <p style="font-size:17px;color:var(--text-mid);max-width:480px;margin:0 auto;font-weight:300;line-height:1.7" id="txt-shopsub">Des pièces uniques, sélectionnées pour leur excellence artisanale et leur beauté intemporelle.</p>
+  </div>
+  <div class="products-grid" id="products-grid">
+    <div class="product-card" id="pcard-1">
+      <div class="product-img-wrapper">
+        <img id="prod-img-1" src="" alt="Sac Kaba Luxe" style="display:none">
+        <div id="prod-ph-1" class="img-placeholder">📦<br>Photo à venir</div>
+        <span class="product-badge">Bestseller</span>
+      </div>
+      <div class="product-info">
+        <div class="product-category" id="pc1">Sacs &amp; Accessoires</div>
+        <div class="product-name" id="pn1">Sac Kaba Luxe</div>
+        <div class="product-price" id="pp1">45 000 FCFA</div>
+        <button class="product-btn" onclick="scrollToOrder('Sac Kaba Luxe')" data-i18n="btn_order">Commander</button>
+      </div>
+    </div>
+    <div class="product-card" id="pcard-2">
+      <div class="product-img-wrapper">
+        <img id="prod-img-2" src="" alt="Parure Traditionnelle" style="display:none">
+        <div id="prod-ph-2" class="img-placeholder">📦<br>Photo à venir</div>
+      </div>
+      <div class="product-info">
+        <div class="product-category" id="pc2">Parures &amp; Bijoux</div>
+        <div class="product-name" id="pn2">Parure Traditionnelle</div>
+        <div class="product-price" id="pp2">28 000 FCFA</div>
+        <button class="product-btn" onclick="scrollToOrder('Parure Traditionnelle')" data-i18n="btn_order">Commander</button>
+      </div>
+    </div>
+    <div class="product-card" id="pcard-3">
+      <div class="product-img-wrapper">
+        <img id="prod-img-3" src="" alt="Tote Wax Premium" style="display:none">
+        <div id="prod-ph-3" class="img-placeholder">📦<br>Photo à venir</div>
+        <span class="product-badge" style="background:var(--kente)">Nouveau</span>
+      </div>
+      <div class="product-info">
+        <div class="product-category" id="pc3">Totes &amp; Cabas</div>
+        <div class="product-name" id="pn3">Tote Wax Premium</div>
+        <div class="product-price" id="pp3">35 000 FCFA</div>
+        <button class="product-btn" onclick="scrollToOrder('Tote Wax Premium')" data-i18n="btn_order">Commander</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+
+<section id="testimonial">
+  <div class="testimonial-stars">★★★★★</div>
+  <blockquote class="testimonial-quote" id="txt-testi">"La qualité du sac Kaba est impressionnante, il ne me quitte plus ! Un vrai coup de cœur pour les finitions, c'est une pièce qui suscite des compliments partout où je vais."</blockquote>
+  <p class="testimonial-author" id="txt-tauthor">— Samira K., Abidjan</p>
+  <div class="shipping-banner">
+    <div class="shipping-item"><span class="shipping-icon">🚚</span><span id="txt-s1">Livraison rapide en Côte d'Ivoire</span></div>
+    <div class="shipping-item"><span class="shipping-icon">✈️</span><span id="txt-s2">Expédition internationale disponible</span></div>
+    <div class="shipping-item"><span class="shipping-icon">🔒</span><span id="txt-s3">Paiement sécurisé &amp; garanti</span></div>
+    <div class="shipping-item"><span class="shipping-icon">🎁</span><span id="txt-s4">Emballage cadeau offert</span></div>
+  </div>
+</section>
+
+<!-- COMMANDE -->
+
+<section id="commande">
+  <div class="commande-inner">
+    <div class="section-label" id="txt-ordlabel">Passer une Commande</div>
+    <h2 class="section-title" id="txt-ordtitle">Votre pièce <em>vous attend</em></h2>
+    <div class="divider"></div>
+    <p class="commande-intro" id="txt-ordintro">Remplissez le formulaire ci-dessous et notre équipe vous contactera dans les 24h pour confirmer votre commande et organiser la livraison.</p>
+    <form class="order-form" onsubmit="handleOrder(event)">
+      <div class="form-grid">
+        <div class="form-group"><label data-i18n="form_name">Prénom &amp; Nom *</label><input type="text" required placeholder="Amina Coulibaly"></div>
+        <div class="form-group"><label data-i18n="form_phone">Téléphone / WhatsApp *</label><input type="tel" required placeholder="+225 07 00 00 00 00"></div>
+        <div class="form-group"><label data-i18n="form_email">Email</label><input type="email" placeholder="amina@email.com"></div>
+        <div class="form-group"><label data-i18n="form_city">Ville / Pays *</label><input type="text" required placeholder="Abidjan, Côte d'Ivoire"></div>
+        <div class="form-group full"><label data-i18n="form_article">Article(s) souhaité(s) *</label><input type="text" id="order-product-field" required placeholder="Sac Kaba Luxe..."></div>
+        <div class="form-group"><label data-i18n="form_delivery">Mode de livraison</label><select><option data-i18n="delivery_home">Livraison à domicile</option><option data-i18n="delivery_pickup">Point de retrait</option><option>International – DHL</option></select></div>
+        <div class="form-group"><label data-i18n="form_source">Comment nous avez-vous connu ?</label><select><option>Instagram</option><option>WhatsApp</option><option data-i18n="src_word">Bouche à oreille</option><option data-i18n="src_other">Autre</option></select></div>
+        <div class="form-group full"><label data-i18n="form_message">Message / Demande spéciale</label><textarea placeholder="Couleur souhaitée, personnalisation..."></textarea></div>
+      </div>
+      <div class="form-submit"><button type="submit" class="btn-primary" data-i18n="form_submit">Envoyer ma Commande →</button></div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">Galérie <span>d'Afrik</span></a>
+      <p id="txt-fdesc">Artisanat africain authentique, fait main avec passion. Chaque pièce raconte une histoire, chaque création célèbre notre héritage.</p>
+      <div class="footer-socials">
+        <a href="#" class="social-link" id="footer-ig" title="Instagram">📸</a>
+        <a href="#" class="social-link" id="footer-wa" title="WhatsApp">💬</a>
+      </div>
+    </div>
+    <div class="footer-col"><h4 data-i18n="f_shop">Boutique</h4><ul><li><a href="#products" data-i18n="f_all">Tous les articles</a></li><li><a href="#products">Sacs &amp; Accessoires</a></li><li><a href="#products">Parures &amp; Bijoux</a></li><li><a href="#products">Totes &amp; Cabas</a></li></ul></div>
+    <div class="footer-col"><h4 data-i18n="f_info">Informations</h4><ul><li><a href="#why-us" data-i18n="f_story">Notre histoire</a></li><li><a href="#commande" data-i18n="f_deliv">Livraisons</a></li><li><a href="#commande">Retours &amp; SAV</a></li><li><a href="#commande">FAQ</a></li></ul></div>
+    <div class="footer-col"><h4 data-i18n="f_contact">Contact</h4><ul><li><a id="txt-email" href="#">📧 galerie.dafrik@email.com</a></li><li><a id="txt-addr" href="#">📍 Abidjan, Côte d'Ivoire</a></li><li><a id="txt-hours" href="#">⏰ Lun–Sam : 8h–19h</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span id="txt-copy">© 2025 Galérie d'Afrik — Tous droits réservés</span>
+    <span>Fait avec ❤️ en Côte d'Ivoire</span>
+  </div>
+</footer>
+
+<!-- MODAL -->
+
+<div id="order-modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <div class="moji">🎉</div>
+    <h3 data-i18n="modal_title">Commande reçue !</h3>
+    <p data-i18n="modal_body">Merci ! Notre équipe vous contactera sous 24h pour confirmer et organiser la livraison.</p>
+    <button class="btn-primary" onclick="closeModal()" data-i18n="modal_close">Fermer</button>
+  </div>
+</div>
+
+<!-- ADMIN BTN -->
+
+<button id="admin-toggle" onclick="toggleAdmin()">⚙ Admin</button>
+
+<!-- ADMIN PANEL -->
+
+<div id="admin-panel">
+  <div class="admin-header">
+    <h2>⚙ PANNEAU ADMIN</h2>
+    <button class="admin-close" onclick="toggleAdmin()">✕</button>
+  </div>
+  <div class="admin-tabs">
+    <button class="admin-tab active" onclick="showTab('t-textes',this)">✏ Textes</button>
+    <button class="admin-tab" onclick="showTab('t-images',this)">🖼 Images</button>
+    <button class="admin-tab" onclick="showTab('t-produits',this)">🛍 Produits</button>
+    <button class="admin-tab" onclick="showTab('t-style',this)">🎨 Style</button>
+    <button class="admin-tab" onclick="showTab('t-contact',this)">📱 Plus</button>
+  </div>
+
+  <!-- TEXTES -->
+
+  <div id="t-textes" class="admin-tab-content active">
+    <div class="admin-section">
+      <h3>🏠 Hero — Page d'accueil</h3>
+      <div class="text-item"><div class="text-item-label">Petite accroche</div><textarea id="e-eyebrow">Galérie d'Afrik — Depuis 2020</textarea><button class="tap-btn" onclick="T('txt-eyebrow','e-eyebrow',this)">✔ Appliquer</button></div>
+      <div class="text-item"><div class="text-item-label">Titre Ligne 1</div><textarea id="e-hl1" style="min-height:36px">L'authenticité africaine,</textarea><button class="tap-btn" onclick="T('txt-hero-line1','e-hl1',this)">✔ Appliquer</button></div>
+      <div class="text-item"><div class="text-item-label">Titre Ligne 2 (texte doré)</div><textarea id="e-hem" style="min-height:36px">réinventée pour votre quotidien.</textarea><button class="tap-btn" onclick="T('txt-hero-em','e-hem',this)">✔ Appliquer</button></div>
+      <div class="text-item"><div class="text-item-label">Sous-titre</div><textarea id="e-hsub">Découvrez notre collection exclusive d'accessoires artisanaux : des sacs Kaba aux parures traditionnelles, portez une histoire.</textarea><button class="tap-btn" onclick="T('txt-hero-sub','e-hsub',this)">✔ Appliquer</button></div>
+      <div class="text-item"><div class="text-item-label">Bouton principal</div><textarea id="e-cta1" style="min-height:34px">Découvrir la Collection</textarea><button class="tap-btn" onclick="T('txt-cta1','e-cta1',this)">✔ Appliquer</button></div>
+      <div class="text-item"><div class="text-item-label">Bouton secondaire</div><textarea id="e-cta2" style="min-height:34px">Passer Commande</textarea><button class="tap-btn" onclick="T('txt-cta2','e-cta2',this)">✔ Appliquer</button></div>
+    </div>
+    <div class="admin-section">
+      <h3>💬 Pourquoi Nous</h3>
+      <div class="text-item"><div class="text-item-label">Carte 1 — Titre</div><textarea id="e-w1t" style="min-height:34px">Fait Main</textarea><button class="tap-btn" onclick="T('txt-w1t','e-w1t',this)">✔ Appliquer</button></div>
+      <div class="text-item"><div class="text-item-label">Carte 1 — Texte</div><textarea id="e-w1b">Chaque pièce est unique, confectionnée avec passion par des artisans locaux.</textarea><button class="tap-btn" onclick="T('txt-w1b','e-w1b',this)">✔ Appliquer</button></div>
+      <div class="text-item"><div class="text-item-label">Carte 2 — Titre</div><textarea id="e-w2t" style="min-height:34px">Matériaux Nobles</textarea><button class="tap-btn" onclick="T('txt-w2t','e-w2t',this)">✔ Appliquer</button></div>
+      <div class="text-item"><div class="text-item-label">Carte 2 — Texte</div><textarea id="e-w2b">Nous utilisons des tissus et matériaux authentiques pour une durabilité garantie.</textarea><button class="tap-btn" onclick="T('txt-w2b','e-w2b',this)">✔ Appliquer</button></div>
+      <div class="text-item"><div class="text-item-label">Carte 3 — Titre</div><textarea id="e-w3t" style="min-height:34px">Style Intemporel</textarea><button class="tap-btn" onclick="T('txt-w3t','e-w3t',this)">✔ Appliquer</button></div>
+      <div class="text-item"><div class="text-item-label">Carte 3 — Texte</div><textarea id="e-w3b">Un mélange parfait entre tradition et modernité, adaptable à toutes vos tenues.</textarea><button class="tap-btn" onclick="T('txt-w3b','e-w3b',this)">✔ Appliquer</button></div>
+    </div>
+    <div class="admin-section">
+      <h3>🌟 Vitrine &amp; Témoignage</h3>
+      <div class="text-item"><div class="text-item-label">Texte vitrine</div><textarea id="e-vdesc">"Nos créations célèbrent le savoir-faire ivoirien avec une touche contemporaine."</textarea><button class="tap-btn" onclick="T('txt-vdesc','e-vdesc',this)">✔ Appliquer</button></div>
+      <div class="text-item"><div class="text-item-label">Témoignage</div><textarea id="e-testi">"La qualité du sac Kaba est impressionnante, il ne me quitte plus !"</textarea><button class="tap-btn" onclick="T('txt-testi','e-testi',this)">✔ Appliquer</button></div>
+      <div class="text-item"><div class="text-item-label">Auteur du témoignage</div><textarea id="e-tauthor" style="min-height:34px">— Samira K., Abidjan</textarea><button class="tap-btn" onclick="T('txt-tauthor','e-tauthor',this)">✔ Appliquer</button></div>
+    </div>
+    <div class="admin-section">
+      <h3>📞 Footer &amp; Contact</h3>
+      <div class="text-item"><div class="text-item-label">Description</div><textarea id="e-fdesc">Artisanat africain authentique, fait main avec passion.</textarea><button class="tap-btn" onclick="T('txt-fdesc','e-fdesc',this)">✔ Appliquer</button></div>
+      <div class="text-item"><div class="text-item-label">Email</div><textarea id="e-email" style="min-height:34px">📧 galerie.dafrik@email.com</textarea><button class="tap-btn" onclick="T('txt-email','e-email',this)">✔ Appliquer</button></div>
+      <div class="text-item"><div class="text-item-label">Adresse</div><textarea id="e-addr" style="min-height:34px">📍 Abidjan, Côte d'Ivoire</textarea><button class="tap-btn" onclick="T('txt-addr','e-addr',this)">✔ Appliquer</button></div>
+      <div class="text-item"><div class="text-item-label">Horaires</div><textarea id="e-hours" style="min-height:34px">⏰ Lun–Sam : 8h–19h</textarea><button class="tap-btn" onclick="T('txt-hours','e-hours',this)">✔ Appliquer</button></div>
+    </div>
+    <button class="admin-btn green" onclick="saveAll()">💾 Sauvegarder les textes</button>
+  </div>
+
+  <!-- IMAGES -->
+
+  <div id="t-images" class="admin-tab-content">
+    <div class="admin-section">
+      <h3>🏠 Photo Arrière-plan Hero</h3>
+      <div class="img-upload-zone" id="hero-zone">
+        <input type="file" accept="image/*" onchange="loadImg(this,'hero')">
+        <span class="upload-icon">📁</span>
+        <p><strong>Cliquez ici</strong> pour choisir une photo<br>depuis votre téléphone ou ordinateur</p>
+      </div>
+      <img id="hero-preview" class="img-preview" alt="Aperçu hero">
+      <div class="img-status" id="hero-status"></div>
+      <div class="slider-row"><label>🔍 Zoom</label><input type="range" id="s-zoom" min="60" max="250" value="100" oninput="updateHero()"><span id="v-zoom">100%</span></div>
+      <div class="slider-row"><label>↔ Position X</label><input type="range" id="s-px" min="0" max="100" value="50" oninput="updateHero()"><span id="v-px">50%</span></div>
+      <div class="slider-row"><label>↕ Position Y</label><input type="range" id="s-py" min="0" max="100" value="50" oninput="updateHero()"><span id="v-py">50%</span></div>
+      <div class="slider-row"><label>🌑 Assombrissement</label><input type="range" id="s-dark" min="0" max="92" value="55" oninput="updateOverlay()"><span id="v-dark">55%</span></div>
+      <div class="admin-field" style="margin-top:8px"><label>Hauteur de la section</label>
+        <select id="s-height" onchange="document.getElementById('hero').style.minHeight=this.value">
+          <option value="100vh" selected>Plein écran (100vh)</option>
+          <option value="85vh">Grand (85vh)</option>
+          <option value="70vh">Moyen (70vh)</option>
+          <option value="55vh">Compact (55vh)</option>
+        </select>
+      </div>
+    </div>
+    <div class="admin-section">
+      <h3>🖼 Photo Vitrine (produit phare)</h3>
+      <div class="img-upload-zone">
+        <input type="file" accept="image/*" onchange="loadImg(this,'vitrine')">
+        <span class="upload-icon">📁</span>
+        <p><strong>Cliquez ici</strong> pour choisir une photo</p>
+      </div>
+      <img id="vitrine-preview" class="img-preview" alt="Aperçu vitrine">
+      <div class="img-status" id="vitrine-status"></div>
+      <div class="size-controls" style="margin-top:6px">
+        <div class="admin-field"><label>Ajustement</label><select id="vit-fit" onchange="updateVitrine()"><option value="cover" selected>Cover</option><option value="contain">Contain</option></select></div>
+        <div class="admin-field"><label>Position</label><select id="vit-pos" onchange="updateVitrine()"><option value="center" selected>Centre</option><option value="top">Haut</option><option value="bottom">Bas</option></select></div>
+      </div>
+    </div>
+    <button class="admin-btn green" onclick="saveAll()">💾 Sauvegarder les images</button>
+  </div>
+
+  <!-- PRODUITS -->
+
+  <div id="t-produits" class="admin-tab-content">
+    <div class="admin-section">
+      <h3>📝 Noms &amp; Prix</h3>
+      <div class="text-item"><div class="text-item-label">Produit 1 — Nom</div><textarea id="e-pn1" style="min-height:34px">Sac Kaba Luxe</textarea><button class="tap-btn" onclick="T('pn1','e-pn1',this)">✔ Appliquer</button></div>
+      <div class="text-item"><div class="text-item-label">Produit 1 — Prix</div><textarea id="e-pp1" style="min-height:34px">45 000 FCFA</textarea><button class="tap-btn" onclick="T('pp1','e-pp1',this)">✔ Appliquer</button></div>
+      <div class="text-item"><div class="text-item-label">Produit 2 — Nom</div><textarea id="e-pn2" style="min-height:34px">Parure Traditionnelle</textarea><button class="tap-btn" onclick="T('pn2','e-pn2',this)">✔ Appliquer</button></div>
+      <div class="text-item"><div class="text-item-label">Produit 2 — Prix</div><textarea id="e-pp2" style="min-height:34px">28 000 FCFA</textarea><button class="tap-btn" onclick="T('pp2','e-pp2',this)">✔ Appliquer</button></div>
+      <div class="text-item"><div class="text-item-label">Produit 3 — Nom</div><textarea id="e-pn3" style="min-height:34px">Tote Wax Premium</textarea><button class="tap-btn" onclick="T('pn3','e-pn3',this)">✔ Appliquer</button></div>
+      <div class="text-item"><div class="text-item-label">Produit 3 — Prix</div><textarea id="e-pp3" style="min-height:34px">35 000 FCFA</textarea><button class="tap-btn" onclick="T('pp3','e-pp3',this)">✔ Appliquer</button></div>
+    </div>
+    <div class="admin-section">
+      <h3>📸 Photo Produit 1</h3>
+      <div class="img-upload-zone"><input type="file" accept="image/*" onchange="loadImg(this,'p1')"><span class="upload-icon">📁</span><p><strong>Cliquez</strong> pour ajouter la photo du produit 1</p></div>
+      <img id="p1-preview" class="img-preview" alt="Aperçu P1">
+      <div class="img-status" id="p1-status"></div>
+    </div>
+    <div class="admin-section">
+      <h3>📸 Photo Produit 2</h3>
+      <div class="img-upload-zone"><input type="file" accept="image/*" onchange="loadImg(this,'p2')"><span class="upload-icon">📁</span><p><strong>Cliquez</strong> pour ajouter la photo du produit 2</p></div>
+      <img id="p2-preview" class="img-preview" alt="Aperçu P2">
+      <div class="img-status" id="p2-status"></div>
+    </div>
+    <div class="admin-section">
+      <h3>📸 Photo Produit 3</h3>
+      <div class="img-upload-zone"><input type="file" accept="image/*" onchange="loadImg(this,'p3')"><span class="upload-icon">📁</span><p><strong>Cliquez</strong> pour ajouter la photo du produit 3</p></div>
+      <img id="p3-preview" class="img-preview" alt="Aperçu P3">
+      <div class="img-status" id="p3-status"></div>
+    </div>
+    <div class="admin-section">
+      <h3>📐 Format des photos produits</h3>
+      <div class="admin-field"><select id="prod-ratio" onchange="applyRatio()"><option value="3/4" selected>Portrait 3:4</option><option value="1/1">Carré 1:1</option><option value="4/3">Paysage 4:3</option><option value="16/9">Cinéma 16:9</option></select></div>
+    </div>
+    <div class="admin-section">
+      <h3>➕ Ajouter un nouveau produit</h3>
+      <div class="admin-field"><label>Nom *</label><input type="text" id="np-name" placeholder="Nom du produit"></div>
+      <div class="admin-field"><label>Catégorie</label><input type="text" id="np-cat" placeholder="Sacs & Accessoires"></div>
+      <div class="admin-field"><label>Prix *</label><input type="text" id="np-price" placeholder="30 000 FCFA"></div>
+      <div class="admin-field"><label>Badge (ex: Nouveau)</label><input type="text" id="np-badge" placeholder="Nouveau"></div>
+      <div class="admin-section" style="margin-top:8px">
+        <div class="img-upload-zone"><input type="file" accept="image/*" id="np-file" onchange="loadImg(this,'np')"><span class="upload-icon">📁</span><p>Photo du nouveau produit</p></div>
+        <img id="np-preview" class="img-preview" alt="Aperçu">
+      </div>
+      <button class="admin-btn" onclick="addProduct()">➕ Ajouter ce produit</button>
+    </div>
+    <button class="admin-btn green" onclick="saveAll()">💾 Sauvegarder</button>
+  </div>
+
+  <!-- STYLE -->
+
+  <div id="t-style" class="admin-tab-content">
+    <div class="admin-section">
+      <h3>🎨 Couleurs du site</h3>
+      <div class="size-controls">
+        <div class="admin-field"><label>Or principal</label><input type="color" value="#C9922A" oninput="SC('--gold',this.value)"></div>
+        <div class="admin-field"><label>Or clair</label><input type="color" value="#E8B84B" oninput="SC('--gold-light',this.value)"></div>
+        <div class="admin-field"><label>Fond sombre</label><input type="color" value="#3D2B1F" oninput="SC('--earth',this.value)"></div>
+        <div class="admin-field"><label>Terracotta</label><input type="color" value="#B85C38" oninput="SC('--terracotta',this.value)"></div>
+        <div class="admin-field"><label>Fond crème</label><input type="color" value="#F5EDD8" oninput="SC('--cream',this.value)"></div>
+        <div class="admin-field"><label>Vert Kente</label><input type="color" value="#2A5C45" oninput="SC('--kente',this.value)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLUS -->
+
+  <div id="t-contact" class="admin-tab-content">
+    <div class="admin-section">
+      <h3>📱 Réseaux Sociaux</h3>
+      <div class="admin-field"><label>Lien Instagram complet</label><input type="text" id="ig-link" placeholder="https://instagram.com/galerie.dafrik"></div>
+      <div class="admin-field"><label>Numéro WhatsApp (chiffres seulement)</label><input type="text" id="wa-number" placeholder="22507000000"></div>
+      <button class="admin-btn" onclick="applySocials()">✔ Appliquer</button>
+    </div>
+    <div class="admin-section">
+      <h3>🌐 Langue</h3>
+      <button class="admin-btn" onclick="toggleLang()" id="lang-switch-btn">🌐 Passer en English</button>
+    </div>
+    <div class="admin-section">
+      <h3>💾 Sauvegarder / Réinitialiser</h3>
+      <p style="font-size:9px;color:rgba(245,237,216,.5);margin-bottom:10px;line-height:1.6">La sauvegarde conserve vos textes, images et réglages dans ce navigateur. Les images sont stockées en base64 directement.</p>
+      <button class="admin-btn green" onclick="saveAll()">💾 Tout sauvegarder</button>
+      <button class="admin-btn outline" onclick="resetAll()">🔄 Réinitialiser</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// IMAGE LOADER — FileReader → base64 → affichage immédiat + sauvegarde
+// ============================================================
+var imgStore = {}; // key: 'hero','vitrine','p1','p2','p3','np' + new products
+
+function loadImg(input, key) {
+  var file = input.files[0];
+  if (!file) return;
+  setStatus(key, '⏳ Chargement...', '');
+
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var b64 = e.target.result;
+    imgStore[key] = b64;
+    applyImage(key, b64);
+    setStatus(key, '✅ Image appliquée !', 'ok');
+
+    // Show preview
+    var prev = document.getElementById(key + '-preview');
+    if (prev) { prev.src = b64; prev.style.display = 'block'; }
+  };
+  reader.onerror = function() { setStatus(key, '❌ Erreur de chargement', 'err'); };
+  reader.readAsDataURL(file);
+}
+
+function applyImage(key, b64) {
+  if (key === 'hero') {
+    var bg = document.getElementById('hero-bg');
+    bg.style.backgroundImage = "url('" + b64 + "')";
+    updateHero();
+  } else if (key === 'vitrine') {
+    var img = document.getElementById('vitrine-img');
+    var ph = document.getElementById('vitrine-placeholder');
+    img.src = b64;
+    img.style.display = 'block';
+    if (ph) ph.style.display = 'none';
+    updateVitrine();
+  } else if (key === 'p1' || key === 'p2' || key === 'p3') {
+    var n = key[1];
+    var pimg = document.getElementById('prod-img-' + n);
+    var pph = document.getElementById('prod-ph-' + n);
+    pimg.src = b64;
+    pimg.style.display = 'block';
+    if (pph) pph.style.display = 'none';
+  }
+  // 'np' is handled at addProduct time
+}
+
+function setStatus(key, msg, cls) {
+  var el = document.getElementById(key + '-status');
+  if (!el) return;
+  el.textContent = msg;
+  el.className = 'img-status ' + (cls || '');
+}
+
+// ============================================================
+// HERO CONTROLS
+// ============================================================
+function updateHero() {
+  var bg = document.getElementById('hero-bg');
+  var z = document.getElementById('s-zoom').value;
+  var px = document.getElementById('s-px').value;
+  var py = document.getElementById('s-py').value;
+  document.getElementById('v-zoom').textContent = z + '%';
+  document.getElementById('v-px').textContent = px + '%';
+  document.getElementById('v-py').textContent = py + '%';
+  bg.style.backgroundSize = z + '%';
+  bg.style.backgroundPosition = px + '% ' + py + '%';
+}
+function updateOverlay() {
+  var v = document.getElementById('s-dark').value;
+  document.getElementById('v-dark').textContent = v + '%';
+  var o = v / 100;
+  var hi = Math.min(o + 0.2, 1).toFixed(2);
+  var lo = Math.max(o - 0.25, 0).toFixed(2);
+  document.getElementById('hero-overlay').style.background =
+    'linear-gradient(105deg,rgba(61,43,31,' + hi + ') 45%,rgba(61,43,31,' + lo + ') 100%)';
+}
+
+// ============================================================
+// VITRINE CONTROLS
+// ============================================================
+function updateVitrine() {
+  var img = document.getElementById('vitrine-img');
+  img.style.objectFit = document.getElementById('vit-fit').value;
+  img.style.objectPosition = document.getElementById('vit-pos').value;
+}
+
+// ============================================================
+// TEXT EDITOR
+// ============================================================
+function T(targetId, sourceId, btn) {
+  var el = document.getElementById(targetId);
+  var val = document.getElementById(sourceId).value;
+  if (!el) return;
+  el.textContent = val;
+  var orig = btn.textContent;
+  btn.textContent = '✅ Appliqué !';
+  btn.style.background = 'rgba(42,92,69,.7)';
+  setTimeout(function() { btn.textContent = orig; btn.style.background = ''; }, 1800);
+}
+
+// ============================================================
+// PRODUCT RATIO
+// ============================================================
+function applyRatio() {
+  var r = document.getElementById('prod-ratio').value;
+  document.querySelectorAll('.product-img-wrapper').forEach(function(el) { el.style.aspectRatio = r; });
+}
+
+// ============================================================
+// ADD PRODUCT
+// ============================================================
+function addProduct() {
+  var name = document.getElementById('np-name').value.trim();
+  var cat = document.getElementById('np-cat').value.trim();
+  var price = document.getElementById('np-price').value.trim();
+  var badge = document.getElementById('np-badge').value.trim();
+  if (!name || !price) { alert('⚠ Veuillez indiquer le nom et le prix.'); return; }
+  var b64 = imgStore['np'] || '';
+  var id = 'np-' + Date.now();
+  var g = document.getElementById('products-grid');
+  var c = document.createElement('div');
+  c.className = 'product-card';
+  c.innerHTML =
+    '<div class="product-img-wrapper">' +
+    (b64 ? '<img src="' + b64 + '" alt="' + name + '" style="width:100%;height:100%;object-fit:cover;display:block">' :
+           '<div class="img-placeholder">📦<br>Photo à venir</div>') +
+    (badge ? '<span class="product-badge">' + badge + '</span>' : '') +
+    '</div><div class="product-info">' +
+    '<div class="product-category">' + (cat || 'Artisanat') + '</div>' +
+    '<div class="product-name">' + name + '</div>' +
+    '<div class="product-price">' + price + '</div>' +
+    '<button class="product-btn" onclick="scrollToOrder(\'' + name + '\')">Commander</button>' +
+    '</div>';
+  g.appendChild(c);
+  // Save new product in store
+  if (!imgStore._products) imgStore._products = [];
+  imgStore._products.push({ name: name, cat: cat, price: price, badge: badge, img: b64 });
+  ['np-name','np-cat','np-price','np-badge'].forEach(function(id){ document.getElementById(id).value = ''; });
+  document.getElementById('np-preview').style.display = 'none';
+  delete imgStore['np'];
+  alert('✅ "' + name + '" ajouté avec succès !');
+}
+
+// ============================================================
+// COLORS
+// ============================================================
+function SC(v, val) { document.documentElement.style.setProperty(v, val); }
+
+// ============================================================
+// SOCIALS
+// ============================================================
+function applySocials() {
+  var ig = document.getElementById('ig-link').value.trim();
+  var wa = document.getElementById('wa-number').value.trim();
+  if (ig) document.getElementById('footer-ig').href = ig;
+  if (wa) document.getElementById('footer-wa').href = 'https://wa.me/' + wa.replace(/\D/g, '');
+}
+
+// ============================================================
+// ADMIN PANEL
+// ============================================================
+function toggleAdmin() { document.getElementById('admin-panel').classList.toggle('open'); }
+function showTab(id, btn) {
+  document.querySelectorAll('.admin-tab-content').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.admin-tab').forEach(function(t){ t.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ============================================================
+// LANGUAGE
+// ============================================================
+var lang = 'fr';
+var TR = {
+  fr:{ nav_why:'Notre Philosophie',nav_collection:'Collection',nav_shop:'Boutique',nav_order:'Commander',btn_order:'Commander',form_name:'Prénom & Nom *',form_phone:'Téléphone / WhatsApp *',form_email:'Email',form_city:'Ville / Pays *',form_article:'Article(s) souhaité(s) *',form_delivery:'Mode de livraison',form_source:'Comment nous avez-vous connu ?',form_message:'Message / Demande spéciale',form_submit:'Envoyer ma Commande →',delivery_home:'Livraison à domicile',delivery_pickup:'Point de retrait',src_word:'Bouche à oreille',src_other:'Autre',f_shop:'Boutique',f_all:'Tous les articles',f_info:'Informations',f_story:'Notre histoire',f_deliv:'Livraisons',f_contact:'Contact',modal_title:'Commande reçue !',modal_body:'Merci ! Notre équipe vous contactera sous 24h.',modal_close:'Fermer',lbl:'🌐 Passer en English',btn:'🌐 English' },
+  en:{ nav_why:'Our Philosophy',nav_collection:'Collection',nav_shop:'Shop',nav_order:'Order Now',btn_order:'Order Now',form_name:'First & Last Name *',form_phone:'Phone / WhatsApp *',form_email:'Email',form_city:'City / Country *',form_article:'Desired item(s) *',form_delivery:'Delivery method',form_source:'How did you find us?',form_message:'Message / Special request',form_submit:'Send My Order →',delivery_home:'Home delivery',delivery_pickup:'Pickup point',src_word:'Word of mouth',src_other:'Other',f_shop:'Shop',f_all:'All items',f_info:'Information',f_story:'Our story',f_deliv:'Shipping',f_contact:'Contact',modal_title:'Order Received!',modal_body:'Thank you! We will contact you within 24h.',modal_close:'Close',lbl:'🌐 Passer en Français',btn:'🌐 Français' }
+};
+function applyLang(l) {
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k = el.getAttribute('data-i18n');
+    if (TR[l][k]) el.textContent = TR[l][k];
+  });
+  document.getElementById('lang-btn').textContent = TR[l].btn;
+  document.getElementById('mlang').textContent = TR[l].btn;
+  var lb = document.getElementById('lang-switch-btn');
+  if (lb) lb.textContent = TR[l].lbl;
+}
+function toggleLang() { lang = lang === 'fr' ? 'en' : 'fr'; applyLang(lang); }
+
+// ============================================================
+// ORDER
+// ============================================================
+function scrollToOrder(p) { document.getElementById('order-product-field').value = p; document.getElementById('commande').scrollIntoView({ behavior: 'smooth' }); }
+function handleOrder(e) { e.preventDefault(); document.getElementById('order-modal').style.display = 'flex'; e.target.reset(); }
+function closeModal() { document.getElementById('order-modal').style.display = 'none'; }
+
+// ============================================================
+// MOBILE MENU
+// ============================================================
+function toggleMobile() { document.getElementById('mobile-menu').classList.toggle('open'); document.getElementById('hamburger').classList.toggle('active'); }
+function closeMobile() { document.getElementById('mobile-menu').classList.remove('open'); document.getElementById('hamburger').classList.remove('active'); }
+
+// ============================================================
+// SAVE ALL
+// ============================================================
+var TEXT_IDS = ['txt-eyebrow','txt-hero-line1','txt-hero-em','txt-hero-sub','txt-cta1','txt-cta2','txt-w1t','txt-w1b','txt-w2t','txt-w2b','txt-w3t','txt-w3b','txt-vdesc','txt-testi','txt-tauthor','txt-fdesc','txt-email','txt-addr','txt-hours','txt-copy','pn1','pp1','pn2','pp2','pn3','pp3'];
+
+function saveAll() {
+  try {
+    var texts = {};
+    TEXT_IDS.forEach(function(id){ var el = document.getElementById(id); if (el) texts[id] = el.textContent; });
+    var settings = {
+      texts: texts,
+      lang: lang,
+      heroZoom: document.getElementById('s-zoom').value,
+      heroPX: document.getElementById('s-px').value,
+      heroPY: document.getElementById('s-py').value,
+      heroDark: document.getElementById('s-dark').value,
+      vitFit: document.getElementById('vit-fit').value,
+      vitPos: document.getElementById('vit-pos').value,
+      ig: document.getElementById('ig-link').value,
+      wa: document.getElementById('wa-number').value,
+      prodRatio: document.getElementById('prod-ratio').value
+    };
+    localStorage.setItem('gda-settings', JSON.stringify(settings));
+    // Save images separately (they can be large)
+    var imgKeys = ['hero','vitrine','p1','p2','p3'];
+    imgKeys.forEach(function(k){ if (imgStore[k]) { try { localStorage.setItem('gda-img-' + k, imgStore[k]); } catch(e){ console.warn('Image ' + k + ' too large for localStorage'); } } });
+    // Save added products
+    if (imgStore._products) { try { localStorage.setItem('gda-products', JSON.stringify(imgStore._products)); } catch(e){} }
+    alert('✅ Tout a été sauvegardé !');
+  } catch(e) { alert('⚠ Erreur de sauvegarde : ' + e.message); }
+}
+
+function resetAll() {
+  if (confirm('Réinitialiser toutes les modifications ?')) {
+    ['gda-settings','gda-img-hero','gda-img-vitrine','gda-img-p1','gda-img-p2','gda-img-p3','gda-products'].forEach(function(k){ localStorage.removeItem(k); });
+    location.reload();
+  }
+}
+
+// ============================================================
+// LOAD ON START
+// ============================================================
+window.addEventListener('load', function() {
+  // Restore images first
+  var imgKeys = ['hero','vitrine','p1','p2','p3'];
+  imgKeys.forEach(function(k) {
+    var b64 = localStorage.getItem('gda-img-' + k);
+    if (b64) { imgStore[k] = b64; applyImage(k, b64); var prev = document.getElementById(k + '-preview'); if (prev) { prev.src = b64; prev.style.display = 'block'; } }
+  });
+
+  // Restore settings
+  var raw = localStorage.getItem('gda-settings');
+  if (raw) {
+    try {
+      var s = JSON.parse(raw);
+      if (s.texts) Object.keys(s.texts).forEach(function(id){ var el = document.getElementById(id); if (el) el.textContent = s.texts[id]; });
+      if (s.heroZoom) { document.getElementById('s-zoom').value = s.heroZoom; }
+      if (s.heroPX) { document.getElementById('s-px').value = s.heroPX; }
+      if (s.heroPY) { document.getElementById('s-py').value = s.heroPY; }
+      if (s.heroDark) { document.getElementById('s-dark').value = s.heroDark; }
+      updateHero(); updateOverlay();
+      if (s.vitFit) document.getElementById('vit-fit').value = s.vitFit;
+      if (s.vitPos) document.getElementById('vit-pos').value = s.vitPos;
+      updateVitrine();
+      if (s.ig) { document.getElementById('ig-link').value = s.ig; }
+      if (s.wa) { document.getElementById('wa-number').value = s.wa; }
+      if (s.ig || s.wa) applySocials();
+      if (s.prodRatio) { document.getElementById('prod-ratio').value = s.prodRatio; applyRatio(); }
+      if (s.lang && s.lang !== 'fr') { lang = s.lang; applyLang(lang); }
+    } catch(e) { console.warn('Load error', e); }
+  }
+
+  // Restore added products
+  var prods = localStorage.getItem('gda-products');
+  if (prods) {
+    try {
+      JSON.parse(prods).forEach(function(p) {
+        var g = document.getElementById('products-grid');
+        var c = document.createElement('div'); c.className = 'product-card';
+        c.innerHTML = '<div class="product-img-wrapper">' +
+          (p.img ? '<img src="' + p.img + '" alt="' + p.name + '" style="width:100%;height:100%;object-fit:cover;display:block">' : '<div class="img-placeholder">📦<br>Photo à venir</div>') +
+          (p.badge ? '<span class="product-badge">' + p.badge + '</span>' : '') +
+          '</div><div class="product-info"><div class="product-category">' + (p.cat || 'Artisanat') + '</div><div class="product-name">' + p.name + '</div><div class="product-price">' + p.price + '</div><button class="product-btn" onclick="scrollToOrder(\'' + p.name + '\')">Commander</button></div>';
+        g.appendChild(c);
+      });
+    } catch(e) {}
+  }
+});
+
+// Navbar shrink
+window.addEventListener('scroll', function() {
+  var nav = document.getElementById('main-nav');
+  nav.style.padding = window.scrollY > 60 ? '10px 60px' : '18px 60px';
+});
+</script>
+
+</body>
+</html>
