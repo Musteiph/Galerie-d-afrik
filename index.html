@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galerie d'Afrik</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Crimson+Pro:wght@300;400;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#C9922A;--gl:#E8B84B;--earth:#3D2B1F;--em:#6B4226;--cream:#F5EDD8;--cd:#EAD9B8;--terra:#B85C38;--kente:#2A5C45;--td:#1A1008;--tm:#4A3728;--white:#FFFDF7}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Crimson Pro',Georgia,serif;background:var(--cream);color:var(--td);overflow-x:hidden}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.hbg span{display:block;width:26px;height:2px;background:var(--cream);border-radius:2px;transition:all .3s}
+.hbg.on span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hbg.on span:nth-child(2){opacity:0}
+.hbg.on span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+nav{position:fixed;top:0;width:100%;z-index:500;padding:18px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(61,43,31,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,146,42,.25);transition:padding .3s}
+.logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--gl);letter-spacing:2px;text-decoration:none;flex-shrink:0}
+.logo span{color:var(--cream);font-style:italic;font-weight:300}
+.nright{display:flex;align-items:center;gap:24px}
+.nlinks{display:flex;gap:20px;list-style:none}
+.nlinks a{color:var(--cream);text-decoration:none;font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;opacity:.85;transition:opacity .2s,color .2s}
+.nlinks a:hover{opacity:1;color:var(--gl)}
+.ncta{background:var(--gold)!important;color:var(--earth)!important;padding:9px 18px!important;border-radius:2px;opacity:1!important;font-weight:600!important}
+.lbtn{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;background:rgba(201,146,42,.2);border:1px solid var(--gold);color:var(--gl);padding:6px 12px;border-radius:20px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.lbtn:hover{background:var(--gold);color:var(--earth)}
+.mmenu{display:none;position:fixed;inset:0;background:rgba(61,43,31,.99);z-index:490;flex-direction:column;align-items:center;justify-content:center;gap:26px}
+.mmenu.on{display:flex}
+.mmenu a{color:var(--cream);text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;transition:color .2s}
+.mmenu a:hover{color:var(--gl)}
+#hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;background:var(--earth)}
+#hbg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;transition:all .3s}
+.hov{position:absolute;inset:0;background:linear-gradient(105deg,rgba(61,43,31,.83) 45%,rgba(61,43,31,.3) 100%);z-index:1}
+.hpat{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,transparent,transparent 30px,rgba(201,146,42,.04) 30px,rgba(201,146,42,.04) 31px);z-index:1}
+.hcon{position:relative;z-index:2;max-width:700px;padding:140px 80px 80px}
+.heye{font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--gl);margin-bottom:24px;animation:fu .8s .2s both}
+.htit{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,70px);font-weight:300;line-height:1.15;color:var(--cream);margin-bottom:28px;animation:fu .8s .4s both}
+.htit em{color:var(--gl);font-style:italic}
+.hsub{font-family:'Crimson Pro',serif;font-size:clamp(15px,2vw,19px);font-weight:300;line-height:1.7;color:rgba(245,237,216,.85);margin-bottom:44px;max-width:520px;animation:fu .8s .6s both}
+.hact{display:flex;gap:14px;flex-wrap:wrap;animation:fu .8s .8s both}
+@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.bp{background:var(--gold);color:var(--earth);padding:15px 36px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border-radius:2px;display:inline-block;transition:all .3s;border:none;cursor:pointer}
+.bp:hover{background:var(--gl);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,146,42,.35)}
+.bo{background:transparent;color:var(--cream);padding:14px 36px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border-radius:2px;border:1px solid rgba(245,237,216,.45);display:inline-block;transition:all .3s}
+.bo:hover{border-color:var(--gl);color:var(--gl)}
+.hbadge{position:absolute;right:80px;bottom:80px;width:115px;height:115px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;text-align:center;font-family:'Cormorant Garamond',serif;font-size:13px;line-height:1.4;color:var(--earth);font-weight:600;animation:sp 20s linear infinite;z-index:2}
+@keyframes sp{to{transform:rotate(360deg)}}
+.hbi{animation:sp 20s linear infinite reverse;padding:12px}
+section{padding:88px 80px}
+.slbl{font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.stit{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,50px);font-weight:300;line-height:1.2;color:var(--earth);margin-bottom:20px}
+.stit em{font-style:italic;color:var(--terra)}
+.div{width:60px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-bottom:24px}
+#why{background:var(--earth);position:relative;overflow:hidden}
+#why::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(201,146,42,.03) 40px,rgba(201,146,42,.03) 41px)}
+.wi{position:relative;z-index:1}
+#why .stit{color:var(--cream)}
+#why .slbl{color:var(--gl)}
+#why .div{background:linear-gradient(90deg,var(--gl),transparent)}
+.wgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
+.wcard{padding:34px;border:1px solid rgba(201,146,42,.2);border-radius:4px;transition:all .4s;background:rgba(255,255,255,.03)}
+.wcard:hover{border-color:var(--gold);background:rgba(201,146,42,.07);transform:translateY(-4px)}
+.wico{font-size:34px;margin-bottom:18px;display:block}
+.wcard h3{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:600;color:var(--gl);margin-bottom:11px}
+.wcard p{font-size:16px;line-height:1.7;color:rgba(245,237,216,.75);font-weight:300}
+#vit{background:var(--cream);padding:88px 0}
+.vinn{display:grid;grid-template-columns:1fr 1fr;min-height:560px;max-width:1400px;margin:0 auto}
+.vimw{position:relative;overflow:hidden;background:var(--em)}
+#vimg{width:100%;height:100%;object-fit:cover;object-position:center;display:none;transition:transform .6s ease}
+.vimw:hover #vimg{transform:scale(1.04)}
+.vov{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(61,43,31,.65));padding:34px}
+.vtag{background:var(--gold);color:var(--earth);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;display:inline-block;border-radius:2px}
+.vcon{background:var(--earth);padding:66px 56px;display:flex;flex-direction:column;justify-content:center}
+.vcon .stit{color:var(--cream)}
+.vcon .slbl{color:var(--gl)}
+.vcon .div{background:linear-gradient(90deg,var(--gl),transparent)}
+.vdesc{font-size:18px;line-height:1.8;color:rgba(245,237,216,.8);font-weight:300;margin-bottom:30px;font-style:italic}
+.vfeat{display:flex;flex-direction:column;gap:11px;margin-bottom:34px}
+.vfi{display:flex;align-items:center;gap:12px;font-family:'Montserrat',sans-serif;font-size:12px;color:rgba(245,237,216,.7);letter-spacing:1px}
+.vfi::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%;flex-shrink:0}
+.iph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--cd),var(--cream));color:var(--em);font-family:'Montserrat',sans-serif;font-size:11px;text-align:center;padding:20px;gap:8px;min-height:300px}
+#prod{background:var(--white);text-align:center}
+.ph{margin-bottom:52px}
+.ph .slbl,.ph .div{margin:0 auto 16px}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:1200px;margin:0 auto}
+.pcard{background:var(--cream);border-radius:4px;overflow:hidden;transition:all .4s;text-align:left}
+.pcard:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(61,43,31,.2)}
+.piw{position:relative;overflow:hidden;aspect-ratio:3/4;background:var(--cd)}
+.piw img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.pcard:hover .piw img{transform:scale(1.06)}
+.pbadge{position:absolute;top:13px;left:13px;background:var(--terra);color:#fff;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:1px;padding:4px 9px;border-radius:2px}
+.pinf{padding:20px}
+.pcat{font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.pname{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--earth);margin-bottom:6px}
+.pprice{font-family:'Montserrat',sans-serif;font-size:14px;font-weight:600;color:var(--terra);margin-bottom:13px}
+.pbtn{display:block;text-align:center;background:var(--earth);color:var(--cream);padding:10px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;border-radius:2px;transition:background .2s;cursor:pointer;border:none;width:100%}
+.pbtn:hover{background:var(--gold);color:var(--earth)}
+#testi{background:linear-gradient(135deg,var(--earth) 0%,#2A1A10 100%);text-align:center;position:relative;overflow:hidden}
+#testi::before{content:'\201C';position:absolute;top:-40px;left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',serif;font-size:260px;color:rgba(201,146,42,.06);line-height:1}
+.tstars{font-size:20px;color:var(--gold);margin-bottom:26px;letter-spacing:4px}
+.tq{font-family:'Cormorant Garamond',serif;font-size:clamp(19px,2.8vw,29px);font-weight:300;font-style:italic;color:var(--cream);line-height:1.7;max-width:780px;margin:0 auto 30px;position:relative;z-index:1}
+.tau{font-family:'Montserrat',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gl);font-weight:500}
+.ship{margin-top:60px;padding-top:44px;border-top:1px solid rgba(201,146,42,.2);display:flex;justify-content:center;gap:50px;flex-wrap:wrap}
+.shi{display:flex;align-items:center;gap:12px;color:rgba(245,237,216,.8);font-family:'Crimson Pro',serif;font-size:16px}
+.shico{font-size:24px}
+#cmd{background:var(--cd)}
+.cinn{max-width:680px;margin:0 auto;text-align:center}
+.cinn .stit{color:var(--earth)}
+.cinn .div{margin:0 auto 20px}
+.cintro{font-size:17px;color:var(--tm);line-height:1.7;margin-bottom:40px;font-weight:300}
+.oform{text-align:left}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.fg{display:flex;flex-direction:column;gap:6px}
+.fg.full{grid-column:1/-1}
+.fg label{font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--em);font-weight:600}
+.fg input,.fg textarea,.fg select{padding:12px 14px;background:var(--white);border:1px solid rgba(61,43,31,.2);border-radius:3px;font-family:'Crimson Pro',serif;font-size:16px;color:var(--td);transition:border .2s;appearance:none;-webkit-appearance:none}
+.fg input:focus,.fg textarea:focus,.fg select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,146,42,.12)}
+.fg textarea{min-height:105px;resize:vertical}
+.fsub{text-align:center;margin-top:26px}
+footer{background:#160E07;color:rgba(245,237,216,.6);padding:60px 80px 34px}
+.fgr{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:46px;margin-bottom:52px}
+.fbrand .logo{display:block;margin-bottom:14px;text-decoration:none}
+.fbrand p{font-size:15px;line-height:1.7;font-weight:300}
+.fsoc{display:flex;gap:11px;margin-top:20px}
+.slink{width:38px;height:38px;background:rgba(201,146,42,.15);border:1px solid rgba(201,146,42,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--gl);font-size:14px;transition:all .3s}
+.slink:hover{background:var(--gold);color:var(--earth);border-color:var(--gold)}
+.fcol h4{font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;font-weight:600}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.fcol ul a{color:rgba(245,237,216,.6);text-decoration:none;font-size:14px;transition:color .2s}
+.fcol ul a:hover{color:var(--gl)}
+.fbot{border-top:1px solid rgba(201,146,42,.15);padding-top:26px;display:flex;justify-content:space-between;align-items:center;font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:1px}
+/* WA */
+#waf{position:fixed;bottom:86px;right:20px;z-index:9996;width:58px;height:58px;background:#25D366;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.3);animation:wap 2.5s ease-in-out infinite;transition:all .3s}
+#waf:hover{background:#1ebe5d;transform:scale(1.1)}
+#waf svg{width:32px;height:32px;fill:#fff;pointer-events:none}
+@keyframes wap{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.3)}50%{box-shadow:0 4px 32px rgba(37,211,102,.7)}}
+.watip{position:absolute;right:68px;top:50%;transform:translateY(-50%);background:var(--earth);color:var(--cream);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;padding:7px 14px;border-radius:20px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .25s;border:1px solid rgba(201,146,42,.3)}
+#waf:hover .watip{opacity:1}
+#wapop{display:none;position:fixed;bottom:160px;right:20px;z-index:9996;width:320px;background:#fff;border-radius:16px;box-shadow:0 16px 48px rgba(0,0,0,.25);overflow:hidden}
+#wapop.on{display:block;animation:waup .25s ease}
+@keyframes waup{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.wahd{background:#075E54;padding:14px 18px;display:flex;align-items:center;gap:12px}
+.waav{width:44px;height:44px;background:#128C7E;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.wainfo h4{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:#fff;margin-bottom:2px}
+.wainfo span{font-family:'Montserrat',sans-serif;font-size:10px;color:rgba(255,255,255,.6);letter-spacing:.5px}
+.wax{margin-left:auto;background:none;border:none;color:rgba(255,255,255,.6);font-size:22px;cursor:pointer;flex-shrink:0;line-height:1}
+.wax:hover{color:#fff}
+.wabd{padding:14px 16px 16px;background:#ECE5DD}
+.wabub{background:#fff;border-radius:0 10px 10px 10px;padding:10px 14px;font-family:'Crimson Pro',serif;font-size:15px;line-height:1.6;color:#111;box-shadow:0 1px 3px rgba(0,0,0,.1);margin-bottom:14px;position:relative}
+.wabub::before{content:'';position:absolute;top:0;left:-8px;border-top:8px solid #fff;border-left:8px solid transparent}
+.watime{font-family:'Montserrat',sans-serif;font-size:10px;color:#aaa;text-align:right;margin-top:5px}
+.wacomp{background:#fff;border-radius:26px;display:flex;align-items:flex-end;gap:6px;padding:8px 8px 8px 16px;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.wacomp textarea{flex:1;border:none;outline:none;font-family:'Crimson Pro',serif;font-size:15px;color:#111;resize:none;min-height:36px;max-height:100px;line-height:1.5;background:transparent;padding-top:4px}
+.wacomp textarea::placeholder{color:#bbb}
+.wasend{width:42px;height:42px;background:#25D366;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
+.wasend:hover{background:#1ebe5d}
+.wasend svg{width:20px;height:20px;fill:#fff}
+/* ADMIN */
+#adtog{position:fixed;bottom:20px;right:20px;z-index:9997;background:var(--earth);color:var(--gl);border:2px solid var(--gold);border-radius:50px;padding:10px 18px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;letter-spacing:1px;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.5);transition:all .3s}
+#adtog:hover{background:var(--gold);color:var(--earth)}
+#adlock{display:none;position:fixed;top:0;right:0;width:360px;height:100vh;background:#180C06;z-index:9998;flex-direction:column;align-items:center;justify-content:center;padding:28px;box-shadow:-8px 0 40px rgba(0,0,0,.8)}
+#adlock.on{display:flex}
+.lbox{width:100%;text-align:center}
+.lico{font-size:44px;margin-bottom:14px}
+.lbox h3{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--gl);margin-bottom:5px}
+.lsub{display:block;font-family:'Montserrat',sans-serif;font-size:9px;color:rgba(245,237,216,.4);margin-bottom:24px;letter-spacing:2px;text-transform:uppercase}
+.linp{width:100%;padding:14px;background:rgba(255,255,255,.08);border:1px solid rgba(201,146,42,.3);color:var(--cream);border-radius:4px;font-family:'Montserrat',sans-serif;font-size:24px;text-align:center;letter-spacing:10px;margin-bottom:10px}
+.linp:focus{outline:none;border-color:var(--gl)}
+.lerr{font-family:'Montserrat',sans-serif;font-size:11px;color:#eb5757;margin-bottom:12px;min-height:18px}
+.lhint{font-size:9px;color:rgba(245,237,216,.22);margin-top:16px;line-height:1.8;font-family:'Montserrat',sans-serif}
+.lhint strong{color:rgba(201,146,42,.5)}
+.lcanc{display:block;margin-top:14px;font-family:'Montserrat',sans-serif;font-size:10px;color:rgba(245,237,216,.3);background:none;border:none;cursor:pointer;text-decoration:underline;letter-spacing:1px}
+.lcanc:hover{color:rgba(245,237,216,.7)}
+#adpan{display:none;position:fixed;top:0;right:0;width:360px;height:100vh;background:#180C06;color:var(--cream);z-index:9997;overflow-y:auto;box-shadow:-8px 0 40px rgba(0,0,0,.8);padding:20px 16px;font-family:'Montserrat',sans-serif}
+#adpan.on{display:block;animation:sin .3s ease}
+@keyframes sin{from{transform:translateX(100%)}to{transform:translateX(0)}}
+.adh{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(201,146,42,.35)}
+.adh h2{font-size:13px;color:var(--gl);letter-spacing:2px;font-weight:700}
+.adcl{background:none;border:none;color:var(--cream);font-size:20px;cursor:pointer;opacity:.7}
+.adcl:hover{opacity:1}
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-bottom:14px}
+.tab{padding:7px 3px;background:rgba(255,255,255,.06);border:1px solid rgba(201,146,42,.18);color:rgba(245,237,216,.5);font-size:9px;font-weight:700;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:all .2s;text-align:center}
+.tab.on{background:var(--gold);color:var(--earth);border-color:var(--gold)}
+.tc{display:none}.tc.on{display:block}
+.as{margin-bottom:16px}
+.as h3{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:9px;font-weight:700;padding-bottom:5px;border-bottom:1px solid rgba(201,146,42,.15)}
+.af{margin-bottom:9px}
+.af label{display:block;font-size:9px;color:rgba(245,237,216,.58);margin-bottom:4px}
+.af input,.af textarea,.af select{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(201,146,42,.22);color:var(--cream);padding:7px 9px;border-radius:3px;font-family:'Montserrat',sans-serif;font-size:11px}
+.af input:focus,.af textarea:focus{outline:none;border-color:var(--gl)}
+.af textarea{min-height:58px;resize:vertical}
+.af input[type=color]{height:34px;padding:2px;cursor:pointer}
+.af input[type=file]{color:rgba(245,237,216,.7);font-size:10px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.ab{width:100%;padding:9px;background:var(--gold);color:var(--earth);border:none;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase;transition:background .2s;margin-top:4px;font-family:'Montserrat',sans-serif}
+.ab:hover{background:var(--gl)}
+.ab.gr{background:var(--kente)}.ab.gr:hover{background:#3a7a5c}
+.ab.bl{background:#1565c0}.ab.bl:hover{background:#1976d2}
+.ab.ol{background:transparent;border:1px solid var(--gold);color:var(--gold);margin-top:6px}
+.ab.ol:hover{background:rgba(201,146,42,.15)}
+.ti{background:rgba(255,255,255,.05);border:1px solid rgba(201,146,42,.13);border-radius:3px;padding:9px;margin-bottom:8px}
+.tl{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;font-weight:700}
+.ti textarea{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(201,146,42,.18);color:var(--cream);padding:6px 8px;border-radius:3px;font-size:11px;resize:vertical;min-height:48px;line-height:1.5;font-family:'Montserrat',sans-serif}
+.ti textarea:focus{outline:none;border-color:var(--gl)}
+.tb{margin-top:5px;width:100%;padding:6px;background:rgba(201,146,42,.2);color:var(--gl);border:none;border-radius:3px;font-size:9px;font-weight:700;cursor:pointer;transition:background .2s;font-family:'Montserrat',sans-serif}
+.tb:hover{background:rgba(201,146,42,.4)}
+.iuz{border:2px dashed rgba(201,146,42,.35);border-radius:6px;padding:14px;text-align:center;cursor:pointer;transition:all .25s;position:relative;margin-bottom:8px}
+.iuz:hover{border-color:var(--gl);background:rgba(201,146,42,.08)}
+.iuz input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.iuz .uic{font-size:26px;display:block;margin-bottom:5px}
+.iuz p{font-size:10px;color:rgba(245,237,216,.6);line-height:1.5}
+.iprev{width:100%;height:88px;object-fit:cover;border-radius:4px;display:none;margin-bottom:6px;border:1px solid rgba(201,146,42,.25)}
+.ist{font-size:9px;color:rgba(245,237,216,.5);text-align:center;margin-top:4px;min-height:14px}
+.ist.ok{color:#6fcf97}.ist.err{color:#eb5757}
+.slr{display:flex;align-items:center;gap:8px;margin-top:5px}
+.slr label{font-size:9px;color:rgba(245,237,216,.55);white-space:nowrap;width:110px;flex-shrink:0}
+.slr input[type=range]{flex:1;accent-color:var(--gold);height:3px}
+.slr span{font-size:10px;color:var(--gl);min-width:38px;text-align:right}
+.msg{font-size:10px;min-height:16px;margin-top:5px;font-family:'Montserrat',sans-serif}
+.msg.ok{color:#6fcf97}.msg.err{color:#eb5757}
+#povl{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:99999;align-items:center;justify-content:center}
+#povl.on{display:flex}
+.pbox{background:#180C06;border:1px solid rgba(201,146,42,.4);border-radius:12px;padding:40px 48px;text-align:center;max-width:380px;width:90%}
+.pbox h3{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--gl);margin-bottom:10px}
+.pbox p{font-family:'Montserrat',sans-serif;font-size:11px;color:rgba(245,237,216,.6);margin-bottom:16px}
+.pbw{background:rgba(255,255,255,.1);border-radius:20px;height:6px;overflow:hidden;margin-bottom:12px}
+.pbar{height:100%;background:linear-gradient(90deg,var(--gold),var(--gl));border-radius:20px;width:0%;transition:width .4s ease}
+.pst{font-family:'Montserrat',sans-serif;font-size:10px;color:var(--gold);letter-spacing:1px}
+#omod{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:10000;align-items:center;justify-content:center;padding:20px}
+.mbox{background:var(--cream);max-width:440px;width:100%;padding:52px 40px;text-align:center;border-radius:4px}
+.moji{font-size:46px;margin-bottom:16px}
+.mbox h3{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--earth);margin-bottom:11px}
+.mbox p{font-size:15px;color:var(--tm);line-height:1.7;margin-bottom:26px}
+@media(max-width:1100px){nav{padding:16px 28px}section{padding:70px 36px}.hcon{padding:120px 36px 66px}.wgrid{grid-template-columns:1fr 1fr}.vinn{grid-template-columns:1fr}.vcon{padding:46px 36px}.fgr{grid-template-columns:1fr 1fr}.hbadge{right:36px;bottom:36px}}
+@media(max-width:768px){.hbg{display:flex}.nright{display:none}nav{padding:13px 18px}section{padding:52px 18px}.hcon{padding:100px 18px 55px}.hbadge{display:none}.wgrid{grid-template-columns:1fr}.vcon{padding:36px 20px}.pgrid{grid-template-columns:1fr 1fr}.fgrid{grid-template-columns:1fr}.fgr{grid-template-columns:1fr}.fbot{flex-direction:column;gap:9px;text-align:center}footer{padding:46px 20px 28px}.ship{gap:22px}#wapop{width:calc(100vw - 40px);right:20px}#adlock{width:100%}#adpan{width:100%}}
+@media(max-width:480px){.pgrid{grid-template-columns:1fr}.hact{flex-direction:column}.bp,.bo{text-align:center;width:100%}}
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+
+<div class="mmenu" id="mmenu">
+  <a href="#why" onclick="mclose()">Notre Philosophie</a>
+  <a href="#vit" onclick="mclose()">Collection</a>
+  <a href="#prod" onclick="mclose()">Boutique</a>
+  <a href="#cmd" onclick="mclose()">Commander</a>
+  <button class="lbtn" onclick="tLang();mclose()" id="mlng">EN</button>
+</div>
+
+<!-- NAV -->
+
+<nav id="mainnav">
+  <a href="#" class="logo">Galerie <span>d'Afrik</span></a>
+  <div class="nright">
+    <ul class="nlinks">
+      <li><a href="#why">Notre Philosophie</a></li>
+      <li><a href="#vit">Collection</a></li>
+      <li><a href="#prod">Boutique</a></li>
+      <li><a href="#cmd" class="ncta">Commander</a></li>
+    </ul>
+    <button class="lbtn" onclick="tLang()" id="lngbtn">EN</button>
+  </div>
+  <div class="hbg" id="hbgel" onclick="mopen()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+
+<section id="hero">
+  <div id="hbg"></div>
+  <div class="hov" id="hovlay"></div>
+  <div class="hpat"></div>
+  <div class="hcon">
+    <p class="heye" id="t1">Galerie d'Afrik &mdash; Depuis 2020</p>
+    <h1 class="htit"><span id="t2">L'authenticit&eacute; africaine,</span><br><em id="t3">r&eacute;invent&eacute;e pour votre quotidien.</em></h1>
+    <p class="hsub" id="t4">D&eacute;couvrez notre collection exclusive d'accessoires artisanaux : des sacs Kaba aux parures traditionnelles, portez une histoire.</p>
+    <div class="hact">
+      <a href="#prod" class="bp" id="t5">D&eacute;couvrir la Collection</a>
+      <a href="#cmd" class="bo" id="t6">Passer Commande</a>
+    </div>
+  </div>
+  <div class="hbadge"><div class="hbi" id="t7">100%<br>Fait Main</div></div>
+</section>
+
+<!-- POURQUOI NOUS -->
+
+<section id="why">
+  <div class="wi">
+    <div class="slbl">Notre Philosophie</div>
+    <h2 class="stit">Pourquoi <em>nous choisir</em> ?</h2>
+    <div class="div"></div>
+    <div class="wgrid">
+      <div class="wcard"><span class="wico">&#129306;</span><h3 id="t8">Fait Main</h3><p id="t9">Chaque pi&egrave;ce est unique, confectionn&eacute;e avec passion par des artisans locaux qui transmettent un savoir-faire ancestral.</p></div>
+      <div class="wcard"><span class="wico">&#127807;</span><h3 id="t10">Mat&eacute;riaux Nobles</h3><p id="t11">Nous utilisons des tissus et mat&eacute;riaux authentiques pour une durabilit&eacute; garantie. Chaque fibre raconte l'histoire de notre terre.</p></div>
+      <div class="wcard"><span class="wico">&#10024;</span><h3 id="t12">Style Intemporel</h3><p id="t13">Un m&eacute;lange parfait entre tradition et modernit&eacute;, adaptable &agrave; toutes vos tenues. Nos cr&eacute;ations transcendent les tendances.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- VITRINE -->
+
+<section id="vit">
+  <div class="vinn">
+    <div class="vimw">
+      <img id="vimg" src="" alt="Collection">
+      <div id="vph" class="iph">&#128444;<br>Ajoutez une image depuis Admin</div>
+      <div class="vov"><span class="vtag">Collection Signature</span></div>
+    </div>
+    <div class="vcon">
+      <div class="slbl">La Pi&egrave;ce Ma&icirc;tresse</div>
+      <h2 class="stit">Plus qu'un accessoire,<br><em>une identit&eacute;.</em></h2>
+      <div class="div"></div>
+      <p class="vdesc" id="t14">Nos cr&eacute;ations c&eacute;l&egrave;brent le savoir-faire ivoirien avec une touche contemporaine.</p>
+      <div class="vfeat">
+        <div class="vfi" id="t15">Tissage traditionnel Kente &amp; Bogolan</div>
+        <div class="vfi" id="t16">Teintures naturelles v&eacute;g&eacute;tales</div>
+        <div class="vfi" id="t17">Finitions cousues main</div>
+        <div class="vfi" id="t18">Certificat d'authenticit&eacute; inclus</div>
+      </div>
+      <a href="#cmd" class="bp">Commander cette pi&egrave;ce</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUITS -->
+
+<section id="prod">
+  <div class="ph">
+    <div class="slbl">Notre Boutique</div>
+    <h2 class="stit" style="text-align:center">La <em>Collection</em></h2>
+    <div class="div" style="margin:0 auto 20px"></div>
+    <p style="font-size:17px;color:var(--tm);max-width:480px;margin:0 auto;font-weight:300;line-height:1.7" id="t19">Des pi&egrave;ces uniques, s&eacute;lectionn&eacute;es pour leur excellence artisanale.</p>
+  </div>
+  <div class="pgrid" id="pgrid">
+    <div class="pcard">
+      <div class="piw"><img id="pi1" src="" style="display:none" alt="P1"><div id="pp1" class="iph" style="min-height:200px">&#128230;<br>Photo &agrave; venir</div><span class="pbadge">Bestseller</span></div>
+      <div class="pinf"><div class="pcat" id="pc1">Sacs &amp; Accessoires</div><div class="pname" id="pn1">Sac Kaba Luxe</div><div class="pprice" id="pr1">45 000 FCFA</div><button class="pbtn" onclick="goOrd('Sac Kaba Luxe')">Commander</button></div>
+    </div>
+    <div class="pcard">
+      <div class="piw"><img id="pi2" src="" style="display:none" alt="P2"><div id="pp2" class="iph" style="min-height:200px">&#128230;<br>Photo &agrave; venir</div></div>
+      <div class="pinf"><div class="pcat" id="pc2">Parures &amp; Bijoux</div><div class="pname" id="pn2">Parure Traditionnelle</div><div class="pprice" id="pr2">28 000 FCFA</div><button class="pbtn" onclick="goOrd('Parure Traditionnelle')">Commander</button></div>
+    </div>
+    <div class="pcard">
+      <div class="piw"><img id="pi3" src="" style="display:none" alt="P3"><div id="pp3" class="iph" style="min-height:200px">&#128230;<br>Photo &agrave; venir</div><span class="pbadge" style="background:var(--kente)">Nouveau</span></div>
+      <div class="pinf"><div class="pcat" id="pc3">Totes &amp; Cabas</div><div class="pname" id="pn3">Tote Wax Premium</div><div class="pprice" id="pr3">35 000 FCFA</div><button class="pbtn" onclick="goOrd('Tote Wax Premium')">Commander</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEMOIGNAGE -->
+
+<section id="testi">
+  <div class="tstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+  <blockquote class="tq" id="t20">La qualit&eacute; du sac Kaba est impressionnante, il ne me quitte plus ! Un vrai coup de coeur.</blockquote>
+  <p class="tau" id="t21">&mdash; Samira K., Abidjan</p>
+  <div class="ship">
+    <div class="shi"><span class="shico">&#128666;</span><span>Livraison rapide en C&ocirc;te d'Ivoire</span></div>
+    <div class="shi"><span class="shico">&#9992;</span><span>Exp&eacute;dition internationale</span></div>
+    <div class="shi"><span class="shico">&#128274;</span><span>Paiement s&eacute;curis&eacute;</span></div>
+    <div class="shi"><span class="shico">&#127873;</span><span>Emballage cadeau offert</span></div>
+  </div>
+</section>
+
+<!-- COMMANDE -->
+
+<section id="cmd">
+  <div class="cinn">
+    <div class="slbl">Passer une Commande</div>
+    <h2 class="stit">Votre pi&egrave;ce <em>vous attend</em></h2>
+    <div class="div"></div>
+    <p class="cintro">Remplissez le formulaire et notre &eacute;quipe vous contactera dans les 24h.</p>
+    <form class="oform" onsubmit="return ordSub(event)">
+      <div class="fgrid">
+        <div class="fg"><label>Pr&eacute;nom &amp; Nom *</label><input type="text" required placeholder="Amina Coulibaly"></div>
+        <div class="fg"><label>T&eacute;l / WhatsApp *</label><input type="tel" required placeholder="+225 07 00 00 00 00"></div>
+        <div class="fg"><label>Email</label><input type="email" placeholder="amina@email.com"></div>
+        <div class="fg"><label>Ville / Pays *</label><input type="text" required placeholder="Abidjan, C&ocirc;te d'Ivoire"></div>
+        <div class="fg full"><label>Article(s) souhait&eacute;(s) *</label><input type="text" id="opf" required placeholder="Sac Kaba Luxe..."></div>
+        <div class="fg"><label>Livraison</label><select><option>Livraison &agrave; domicile</option><option>Point de retrait</option><option>International &ndash; DHL</option></select></div>
+        <div class="fg"><label>Comment nous avez-vous connu ?</label><select><option>Instagram</option><option>WhatsApp</option><option>Bouche &agrave; oreille</option><option>Autre</option></select></div>
+        <div class="fg full"><label>Message / Demande sp&eacute;ciale</label><textarea placeholder="Couleur souhait&eacute;e, personnalisation..."></textarea></div>
+      </div>
+      <div class="fsub"><button type="submit" class="bp">Envoyer ma Commande &rarr;</button></div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="fgr">
+    <div class="fbrand">
+      <a href="#" class="logo">Galerie <span>d'Afrik</span></a>
+      <p id="t22">Artisanat africain authentique, fait main avec passion.</p>
+      <div class="fsoc">
+        <a href="https://instagram.com/" class="slink" id="fig" target="_blank" rel="noopener">&#128247;</a>
+        <a href="https://wa.me/225XXXXXXXXXX" class="slink" id="fwa" target="_blank" rel="noopener">&#128172;</a>
+      </div>
+    </div>
+    <div class="fcol"><h4>Boutique</h4><ul><li><a href="#prod">Tous les articles</a></li><li><a href="#prod">Sacs &amp; Accessoires</a></li><li><a href="#prod">Parures &amp; Bijoux</a></li><li><a href="#prod">Totes &amp; Cabas</a></li></ul></div>
+    <div class="fcol"><h4>Infos</h4><ul><li><a href="#why">Notre histoire</a></li><li><a href="#cmd">Livraisons</a></li><li><a href="#cmd">Retours &amp; SAV</a></li><li><a href="#cmd">FAQ</a></li></ul></div>
+    <div class="fcol"><h4>Contact</h4><ul>
+      <li><a id="t23" href="#">&#128231; galerie.dafrik@email.com</a></li>
+      <li><a id="t24" href="#">&#128205; Abidjan, C&ocirc;te d'Ivoire</a></li>
+      <li><a id="t25" href="#">&#9200; Lun&ndash;Sam : 8h&ndash;19h</a></li>
+    </ul></div>
+  </div>
+  <div class="fbot">
+    <span id="t26">&copy; 2025 Galerie d'Afrik &mdash; Tous droits r&eacute;serv&eacute;s</span>
+    <span>Fait avec &hearts; en C&ocirc;te d'Ivoire</span>
+  </div>
+</footer>
+
+<!-- ORDER MODAL -->
+
+<div id="omod" onclick="if(event.target===this)oclose()">
+  <div class="mbox"><div class="moji">&#127881;</div><h3>Commande re&ccedil;ue !</h3><p>Merci ! Notre &eacute;quipe vous contactera sous 24h.</p><button class="bp" onclick="oclose()">Fermer</button></div>
+</div>
+
+<!-- WHATSAPP -->
+
+<button id="waf" onclick="waTog()" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span class="watip" id="watip">Discutez avec nous !</span>
+</button>
+<div id="wapop">
+  <div class="wahd"><div class="waav">&#128717;</div><div class="wainfo"><h4 id="waname">Galerie d'Afrik</h4><span>En ligne &middot; R&eacute;pond rapidement</span></div><button class="wax" onclick="waTog()">&#215;</button></div>
+  <div class="wabd">
+    <div class="wabub"><span id="waauto">Bonjour ! &#128075; Bienvenue. Comment puis-je vous aider ?</span><div class="watime" id="watime"></div></div>
+    <div class="wacomp">
+      <textarea id="wamsg" placeholder="Ecrivez votre message..." rows="1"
+        oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,100)+'px'"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();waSend()}"></textarea>
+      <button class="wasend" onclick="waSend()" aria-label="Envoyer"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN TOGGLE -->
+
+<button id="adtog" onclick="adOpen()">⚙ Admin</button>
+
+<!-- ADMIN LOCK -->
+
+<div id="adlock">
+  <div class="lbox">
+    <div class="lico">&#128274;</div>
+    <h3>Panneau Admin</h3>
+    <span class="lsub">Galerie d'Afrik &mdash; Acces restreint</span>
+    <input class="linp" type="password" id="lpwd" placeholder="1234" maxlength="30" onkeydown="if(event.key==='Enter')adCheck()">
+    <div class="lerr" id="lerr"></div>
+    <button class="ab" style="margin-top:0" onclick="adCheck()">Entrer &rarr;</button>
+    <p class="lhint">Code par defaut : <strong>1234</strong><br>Modifiable dans Admin &rsaquo; Plus</p>
+    <button class="lcanc" onclick="adClose()">&#215; Annuler</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+
+<div id="adpan">
+  <div class="adh"><h2>&#9881; ADMIN</h2><button class="adcl" onclick="adPanClose()">&#215;</button></div>
+  <div class="tabs">
+    <button class="tab on" onclick="sTb('tb1',this)">Textes</button>
+    <button class="tab" onclick="sTb('tb2',this)">Images</button>
+    <button class="tab" onclick="sTb('tb3',this)">Produits</button>
+    <button class="tab" onclick="sTb('tb4',this)">Style</button>
+    <button class="tab" onclick="sTb('tb5',this)">Plus</button>
+  </div>
+
+  <div id="tb1" class="tc on">
+    <div class="as"><h3>HERO</h3>
+      <div class="ti"><div class="tl">Accroche</div><textarea id="e1">Galerie d'Afrik - Depuis 2020</textarea><button class="tb" onclick="eTX('t1','e1',this)">OK</button></div>
+      <div class="ti"><div class="tl">Titre ligne 1</div><textarea id="e2">L'authenticite africaine,</textarea><button class="tb" onclick="eTX('t2','e2',this)">OK</button></div>
+      <div class="ti"><div class="tl">Titre ligne 2 (dore)</div><textarea id="e3">reinventee pour votre quotidien.</textarea><button class="tb" onclick="eTX('t3','e3',this)">OK</button></div>
+      <div class="ti"><div class="tl">Sous-titre</div><textarea id="e4">Decouvrez notre collection exclusive d'accessoires artisanaux.</textarea><button class="tb" onclick="eTX('t4','e4',this)">OK</button></div>
+      <div class="ti"><div class="tl">Bouton principal</div><textarea id="e5" style="min-height:34px">Decouvrir la Collection</textarea><button class="tb" onclick="eTX('t5','e5',this)">OK</button></div>
+      <div class="ti"><div class="tl">Bouton secondaire</div><textarea id="e6" style="min-height:34px">Passer Commande</textarea><button class="tb" onclick="eTX('t6','e6',this)">OK</button></div>
+    </div>
+    <div class="as"><h3>POURQUOI NOUS</h3>
+      <div class="ti"><div class="tl">Carte 1 - Titre</div><textarea id="e7" style="min-height:34px">Fait Main</textarea><button class="tb" onclick="eTX('t8','e7',this)">OK</button></div>
+      <div class="ti"><div class="tl">Carte 1 - Texte</div><textarea id="e8">Chaque piece est unique, confectionnee avec passion par des artisans locaux.</textarea><button class="tb" onclick="eTX('t9','e8',this)">OK</button></div>
+      <div class="ti"><div class="tl">Carte 2 - Titre</div><textarea id="e9" style="min-height:34px">Materiaux Nobles</textarea><button class="tb" onclick="eTX('t10','e9',this)">OK</button></div>
+      <div class="ti"><div class="tl">Carte 2 - Texte</div><textarea id="e10">Nous utilisons des tissus et materiaux authentiques pour une durabilite garantie.</textarea><button class="tb" onclick="eTX('t11','e10',this)">OK</button></div>
+      <div class="ti"><div class="tl">Carte 3 - Titre</div><textarea id="e11" style="min-height:34px">Style Intemporel</textarea><button class="tb" onclick="eTX('t12','e11',this)">OK</button></div>
+      <div class="ti"><div class="tl">Carte 3 - Texte</div><textarea id="e12">Un melange parfait entre tradition et modernite, adaptable a toutes vos tenues.</textarea><button class="tb" onclick="eTX('t13','e12',this)">OK</button></div>
+    </div>
+    <div class="as"><h3>TEMOIGNAGE &amp; FOOTER</h3>
+      <div class="ti"><div class="tl">Temoignage</div><textarea id="e13">La qualite du sac Kaba est impressionnante, il ne me quitte plus !</textarea><button class="tb" onclick="eTX('t20','e13',this)">OK</button></div>
+      <div class="ti"><div class="tl">Auteur</div><textarea id="e14" style="min-height:34px">-- Samira K., Abidjan</textarea><button class="tb" onclick="eTX('t21','e14',this)">OK</button></div>
+      <div class="ti"><div class="tl">Description footer</div><textarea id="e15">Artisanat africain authentique, fait main avec passion.</textarea><button class="tb" onclick="eTX('t22','e15',this)">OK</button></div>
+      <div class="ti"><div class="tl">Email</div><textarea id="e16" style="min-height:34px">galerie.dafrik@email.com</textarea><button class="tb" onclick="eTX('t23','e16',this)">OK</button></div>
+      <div class="ti"><div class="tl">Adresse</div><textarea id="e17" style="min-height:34px">Abidjan, Cote d'Ivoire</textarea><button class="tb" onclick="eTX('t24','e17',this)">OK</button></div>
+      <div class="ti"><div class="tl">Horaires</div><textarea id="e18" style="min-height:34px">Lun-Sam : 8h-19h</textarea><button class="tb" onclick="eTX('t25','e18',this)">OK</button></div>
+    </div>
+    <button class="ab gr" onclick="saveLoc()">Sauvegarder</button>
+  </div>
+
+  <div id="tb2" class="tc">
+    <div class="as"><h3>PHOTO HERO</h3>
+      <div class="iuz"><input type="file" accept="image/*" onchange="loadI(this,'h')"><span class="uic">&#128193;</span><p>Choisir une photo depuis votre appareil</p></div>
+      <img id="hprev" class="iprev" alt="">
+      <div class="ist" id="hist"></div>
+      <div class="slr"><label>Zoom</label><input type="range" id="sz" min="60" max="250" value="100" oninput="uHero()"><span id="vz">100%</span></div>
+      <div class="slr"><label>Position X</label><input type="range" id="spx" min="0" max="100" value="50" oninput="uHero()"><span id="vpx">50%</span></div>
+      <div class="slr"><label>Position Y</label><input type="range" id="spy" min="0" max="100" value="50" oninput="uHero()"><span id="vpy">50%</span></div>
+      <div class="slr"><label>Assombrissement</label><input type="range" id="sdk" min="0" max="92" value="55" oninput="uOv()"><span id="vdk">55%</span></div>
+      <div class="af" style="margin-top:8px"><label>Hauteur section</label>
+        <select onchange="document.getElementById('hero').style.minHeight=this.value">
+          <option value="100vh" selected>Plein ecran</option><option value="85vh">Grand</option><option value="70vh">Moyen</option><option value="55vh">Compact</option>
+        </select>
+      </div>
+    </div>
+    <div class="as"><h3>IMAGE VITRINE</h3>
+      <div class="iuz"><input type="file" accept="image/*" onchange="loadI(this,'v')"><span class="uic">&#128193;</span><p>Choisir la photo vitrine</p></div>
+      <img id="vprev" class="iprev" alt="">
+      <div class="ist" id="vist"></div>
+      <div class="g2" style="margin-top:6px">
+        <div class="af"><label>Ajustement</label><select id="vfit" onchange="uVit()"><option value="cover" selected>Cover</option><option value="contain">Contain</option></select></div>
+        <div class="af"><label>Position</label><select id="vpos" onchange="uVit()"><option value="center" selected>Centre</option><option value="top">Haut</option><option value="bottom">Bas</option></select></div>
+      </div>
+    </div>
+    <button class="ab gr" onclick="saveLoc()">Sauvegarder</button>
+  </div>
+
+  <div id="tb3" class="tc">
+    <div class="as"><h3>NOMS &amp; PRIX</h3>
+      <div class="ti"><div class="tl">Produit 1 - Nom</div><textarea id="ep1n" style="min-height:34px">Sac Kaba Luxe</textarea><button class="tb" onclick="eTX('pn1','ep1n',this)">OK</button></div>
+      <div class="ti"><div class="tl">Produit 1 - Prix</div><textarea id="ep1p" style="min-height:34px">45 000 FCFA</textarea><button class="tb" onclick="eTX('pr1','ep1p',this)">OK</button></div>
+      <div class="ti"><div class="tl">Produit 2 - Nom</div><textarea id="ep2n" style="min-height:34px">Parure Traditionnelle</textarea><button class="tb" onclick="eTX('pn2','ep2n',this)">OK</button></div>
+      <div class="ti"><div class="tl">Produit 2 - Prix</div><textarea id="ep2p" style="min-height:34px">28 000 FCFA</textarea><button class="tb" onclick="eTX('pr2','ep2p',this)">OK</button></div>
+      <div class="ti"><div class="tl">Produit 3 - Nom</div><textarea id="ep3n" style="min-height:34px">Tote Wax Premium</textarea><button class="tb" onclick="eTX('pn3','ep3n',this)">OK</button></div>
+      <div class="ti"><div class="tl">Produit 3 - Prix</div><textarea id="ep3p" style="min-height:34px">35 000 FCFA</textarea><button class="tb" onclick="eTX('pr3','ep3p',this)">OK</button></div>
+    </div>
+    <div class="as"><h3>PHOTOS PRODUITS</h3>
+      <div class="af"><label>Produit 1</label><div class="iuz" style="padding:10px"><input type="file" accept="image/*" onchange="loadI(this,'p1')"><span style="font-size:20px">&#128193;</span><p>Photo produit 1</p></div><img id="p1prev" class="iprev" alt=""><div class="ist" id="p1ist"></div></div>
+      <div class="af"><label>Produit 2</label><div class="iuz" style="padding:10px"><input type="file" accept="image/*" onchange="loadI(this,'p2')"><span style="font-size:20px">&#128193;</span><p>Photo produit 2</p></div><img id="p2prev" class="iprev" alt=""><div class="ist" id="p2ist"></div></div>
+      <div class="af"><label>Produit 3</label><div class="iuz" style="padding:10px"><input type="file" accept="image/*" onchange="loadI(this,'p3')"><span style="font-size:20px">&#128193;</span><p>Photo produit 3</p></div><img id="p3prev" class="iprev" alt=""><div class="ist" id="p3ist"></div></div>
+      <div class="af"><label>Format</label><select id="pratio" onchange="uRatio()"><option value="3/4" selected>Portrait 3:4</option><option value="1/1">Carre</option><option value="4/3">Paysage</option><option value="16/9">Cinema</option></select></div>
+    </div>
+    <div class="as"><h3>NOUVEAU PRODUIT</h3>
+      <div class="af"><label>Nom *</label><input type="text" id="npn" placeholder="Nom du produit"></div>
+      <div class="af"><label>Categorie</label><input type="text" id="npc" placeholder="Sacs et Accessoires"></div>
+      <div class="af"><label>Prix *</label><input type="text" id="npp" placeholder="30 000 FCFA"></div>
+      <div class="af"><label>Badge</label><input type="text" id="npb" placeholder="Nouveau"></div>
+      <div class="iuz" style="padding:10px"><input type="file" accept="image/*" onchange="loadI(this,'np')"><span style="font-size:20px">&#128193;</span><p>Photo</p></div>
+      <img id="npprev" class="iprev" alt="">
+      <button class="ab" onclick="addProd()">+ Ajouter ce produit</button>
+    </div>
+    <button class="ab gr" onclick="saveLoc()">Sauvegarder</button>
+  </div>
+
+  <div id="tb4" class="tc">
+    <div class="as"><h3>COULEURS</h3>
+      <div class="g2">
+        <div class="af"><label>Or principal</label><input type="color" value="#C9922A" oninput="sCol('--gold',this.value)"></div>
+        <div class="af"><label>Or clair</label><input type="color" value="#E8B84B" oninput="sCol('--gl',this.value)"></div>
+        <div class="af"><label>Fond sombre</label><input type="color" value="#3D2B1F" oninput="sCol('--earth',this.value)"></div>
+        <div class="af"><label>Terracotta</label><input type="color" value="#B85C38" oninput="sCol('--terra',this.value)"></div>
+        <div class="af"><label>Fond creme</label><input type="color" value="#F5EDD8" oninput="sCol('--cream',this.value)"></div>
+        <div class="af"><label>Vert Kente</label><input type="color" value="#2A5C45" oninput="sCol('--kente',this.value)"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tb5" class="tc">
+    <div class="as"><h3>WHATSAPP</h3>
+      <div class="af"><label>Numero (ex: 225XXXXXXXXXX)</label><input type="text" id="wanum" placeholder="225XXXXXXXXXX"></div>
+      <div class="af"><label>Nom dans le popup</label><input type="text" id="wanam" placeholder="Galerie d'Afrik"></div>
+      <div class="af"><label>Message automatique</label><textarea id="waauto2" style="min-height:60px">Bonjour ! Bienvenue. Comment puis-je vous aider ?</textarea></div>
+      <button class="ab" onclick="apWA()">Appliquer WhatsApp</button>
+      <div class="msg" id="wamsg2"></div>
+    </div>
+    <div class="as"><h3>RESEAUX SOCIAUX</h3>
+      <div class="af"><label>Instagram (URL complete)</label><input type="text" id="igurl" placeholder="https://instagram.com/galerie.dafrik"></div>
+      <div class="af"><label>WhatsApp footer (225XXXXXXXXXX)</label><input type="text" id="wafoot" placeholder="225XXXXXXXXXX"></div>
+      <button class="ab" onclick="apSoc()">Appliquer</button>
+    </div>
+    <div class="as"><h3>MOT DE PASSE</h3>
+      <div class="af"><label>Actuel</label><input type="password" id="opwd" placeholder="..."></div>
+      <div class="af"><label>Nouveau</label><input type="password" id="npwd" placeholder="Nouveau"></div>
+      <div class="af"><label>Confirmer</label><input type="password" id="npwd2" placeholder="Repeter"></div>
+      <div class="msg" id="pwdmsg"></div>
+      <button class="ab" onclick="chPwd()">Changer le mot de passe</button>
+    </div>
+    <div class="as"><h3>GITHUB / NETLIFY</h3>
+      <p style="font-size:9px;color:rgba(245,237,216,.45);margin-bottom:10px;line-height:1.6">Token securise dans Netlify (GH_TOKEN). Entrez seulement le depot.</p>
+      <div class="af"><label>Depot (compte/repo)</label><input type="text" id="ghrepo" placeholder="Musteiph/galerie-dafrik" value="Musteiph/galerie-dafrik"></div>
+      <div class="af"><label>Fichier</label><input type="text" id="ghfile" placeholder="index.html" value="index.html"></div>
+      <div class="af"><label>Branche</label><input type="text" id="ghbranch" placeholder="main" value="main"></div>
+      <button class="ab bl" onclick="publish()">Publier sur GitHub</button>
+      <div class="msg" id="ghmsg"></div>
+    </div>
+    <div class="as"><h3>LANGUE</h3>
+      <button class="ab" onclick="tLang()" id="lsw">Passer en English</button>
+    </div>
+    <div class="as"><h3>SAUVEGARDE</h3>
+      <button class="ab gr" onclick="saveLoc()">Sauvegarder localement</button>
+      <button class="ab ol" onclick="rAll()">Reinitialiser</button>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS OVERLAY -->
+
+<div id="povl">
+  <div class="pbox">
+    <h3>Publication en cours...</h3>
+    <p id="pstep">Preparation...</p>
+    <div class="pbw"><div class="pbar" id="pbar"></div></div>
+    <div class="pst" id="ppct">0%</div>
+  </div>
+</div>
+<script>
+
+var G = function(id){ return document.getElementById(id); };
+
+// ─── MOT DE PASSE ───────────────────────────────────────────────────────────
+var PK = ‘gda-pwd’;
+function getPwd(){ return localStorage.getItem(PK) || ‘1234’; }
+
+function adOpen(){
+G(‘lpwd’).value = ‘’;
+G(‘lerr’).textContent = ‘’;
+G(‘adlock’).classList.add(‘on’);
+setTimeout(function(){ G(‘lpwd’).focus(); }, 100);
+}
+function adClose(){ G(‘adlock’).classList.remove(‘on’); }
+function adPanClose(){ G(‘adpan’).classList.remove(‘on’); }
+
+function adCheck(){
+var v = G(‘lpwd’).value;
+if(v === getPwd()){
+G(‘adlock’).classList.remove(‘on’);
+G(‘adpan’).classList.add(‘on’);
+G(‘lpwd’).value = ‘’;
+G(‘lerr’).textContent = ‘’;
+} else {
+G(‘lerr’).textContent = ‘Mot de passe incorrect’;
+G(‘lpwd’).value = ‘’;
+G(‘lpwd’).focus();
+setTimeout(function(){ G(‘lerr’).textContent = ‘’; }, 2500);
+}
+}
+
+function chPwd(){
+var o = G(‘opwd’).value, n = G(‘npwd’).value, n2 = G(‘npwd2’).value;
+var m = G(‘pwdmsg’);
+if(o !== getPwd()){ m.textContent = ‘Mot de passe actuel incorrect’; m.className = ‘msg err’; return; }
+if(n.length < 3){ m.textContent = ‘Minimum 3 caracteres’; m.className = ‘msg err’; return; }
+if(n !== n2){ m.textContent = ‘Les deux mots de passe ne correspondent pas’; m.className = ‘msg err’; return; }
+localStorage.setItem(PK, n);
+m.textContent = ‘Mot de passe mis a jour !’; m.className = ‘msg ok’;
+G(‘opwd’).value = ‘’; G(‘npwd’).value = ‘’; G(‘npwd2’).value = ‘’;
+setTimeout(function(){ m.textContent = ‘’; }, 3000);
+}
+
+// ─── TABS ────────────────────────────────────────────────────────────────────
+function sTb(id, btn){
+document.querySelectorAll(’.tc’).forEach(function(t){ t.classList.remove(‘on’); });
+document.querySelectorAll(’.tab’).forEach(function(t){ t.classList.remove(‘on’); });
+G(id).classList.add(‘on’);
+btn.classList.add(‘on’);
+}
+
+// ─── EDITEUR TEXTES ──────────────────────────────────────────────────────────
+function eTX(tid, sid, btn){
+var el = G(tid), v = G(sid).value;
+if(!el) return;
+el.textContent = v;
+var o = btn.textContent;
+btn.textContent = ‘OK !’;
+btn.style.background = ‘rgba(42,92,69,.8)’;
+setTimeout(function(){ btn.textContent = o; btn.style.background = ‘’; }, 1500);
+}
+
+// ─── WHATSAPP ────────────────────────────────────────────────────────────────
+function waTog(){
+var p = G(‘wapop’);
+if(p.classList.contains(‘on’)){
+p.classList.remove(‘on’);
+} else {
+var now = new Date();
+G(‘watime’).textContent = String(now.getHours()).padStart(2,‘0’) + ‘:’ + String(now.getMinutes()).padStart(2,‘0’);
+var ta = G(‘wamsg’);
+if(!ta.value) ta.value = G(‘waauto’).textContent;
+p.classList.add(‘on’);
+setTimeout(function(){ ta.focus(); ta.select(); }, 150);
+}
+}
+
+function waSend(){
+var num = (localStorage.getItem(‘gda-wanum’) || ‘’).replace(/\D/g, ‘’);
+if(!num){
+alert(‘Numero WhatsApp non configure.\nAllez dans Admin > Plus > WhatsApp.’);
+return;
+}
+var msg = G(‘wamsg’).value.trim();
+if(!msg){ G(‘wamsg’).focus(); return; }
+window.open(‘https://wa.me/’ + num + ‘?text=’ + encodeURIComponent(msg), ‘_blank’);
+G(‘wapop’).classList.remove(‘on’);
+G(‘wamsg’).value = ‘’;
+}
+
+function apWA(){
+var num  = (G(‘wanum’).value || ‘’).replace(/\D/g, ‘’);
+var name = (G(‘wanam’).value || ‘’).trim();
+var auto = (G(‘waauto2’).value || ‘’).trim();
+var m    = G(‘wamsg2’);
+if(!num){ m.textContent = ‘Numero requis (ex: 22507XXXXXXXX)’; m.className = ‘msg err’; return; }
+localStorage.setItem(‘gda-wanum’, num);
+if(name){ localStorage.setItem(‘gda-waname’, name); G(‘waname’).textContent = name; }
+if(auto){ localStorage.setItem(‘gda-waauto’, auto); G(‘waauto’).textContent = auto; }
+G(‘fwa’).href = ‘https://wa.me/’ + num;
+m.textContent = ‘OK ! Lien: https://wa.me/’ + num; m.className = ‘msg ok’;
+setTimeout(function(){ m.textContent = ‘’; }, 4000);
+}
+
+function loadWA(){
+var num  = localStorage.getItem(‘gda-wanum’);
+var name = localStorage.getItem(‘gda-waname’);
+var auto = localStorage.getItem(‘gda-waauto’);
+if(num)  { G(‘wanum’).value = num; G(‘fwa’).href = ‘https://wa.me/’ + num; }
+if(name) { G(‘wanam’).value = name; G(‘waname’).textContent = name; }
+if(auto) { G(‘waauto2’).value = auto; G(‘waauto’).textContent = auto; }
+}
+
+// ─── IMAGES ──────────────────────────────────────────────────────────────────
+var imgs = {};
+
+function loadI(input, key){
+var f = input.files[0]; if(!f) return;
+setSt(key, ‘Chargement…’, ‘’);
+var r = new FileReader();
+r.onload = function(e){
+var b = e.target.result;
+imgs[key] = b;
+apImg(key, b);
+setSt(key, ‘Image appliquee !’, ‘ok’);
+var p = G(key + ‘prev’);
+if(p){ p.src = b; p.style.display = ‘block’; }
+};
+r.onerror = function(){ setSt(key, ‘Erreur’, ‘err’); };
+r.readAsDataURL(f);
+}
+
+function apImg(key, b){
+if(key === ‘h’){
+G(‘hbg’).style.backgroundImage = “url(’” + b + “’)”;
+uHero();
+} else if(key === ‘v’){
+var i = G(‘vimg’), p = G(‘vph’);
+i.src = b; i.style.display = ‘block’;
+if(p) p.style.display = ‘none’;
+uVit();
+} else if(key === ‘p1’ || key === ‘p2’ || key === ‘p3’){
+var n = key[1];
+var pi = G(‘pi’ + n), ph = G(‘pp’ + n);
+pi.src = b; pi.style.display = ‘block’;
+if(ph) ph.style.display = ‘none’;
+}
+}
+
+function setSt(key, msg, cls){
+var map = { h:‘hist’, v:‘vist’, p1:‘p1ist’, p2:‘p2ist’, p3:‘p3ist’, np:‘npist’ };
+var e = G(map[key] || key + ‘ist’);
+if(e){ e.textContent = msg; e.className = ’ist ’ + (cls || ‘’); }
+}
+
+function uHero(){
+var z = G(‘sz’).value, px = G(‘spx’).value, py = G(‘spy’).value;
+G(‘vz’).textContent = z + ‘%’; G(‘vpx’).textContent = px + ‘%’; G(‘vpy’).textContent = py + ‘%’;
+G(‘hbg’).style.backgroundSize = z + ‘%’;
+G(‘hbg’).style.backgroundPosition = px + ’% ’ + py + ‘%’;
+}
+
+function uOv(){
+var v = G(‘sdk’).value; G(‘vdk’).textContent = v + ‘%’; var o = v / 100;
+G(‘hovlay’).style.background = ‘linear-gradient(105deg,rgba(61,43,31,’ + Math.min(o+0.2,1).toFixed(2) + ‘) 45%,rgba(61,43,31,’ + Math.max(o-0.25,0).toFixed(2) + ‘) 100%)’;
+}
+
+function uVit(){
+var i = G(‘vimg’);
+i.style.objectFit = G(‘vfit’).value;
+i.style.objectPosition = G(‘vpos’).value;
+}
+
+function uRatio(){
+var r = G(‘pratio’).value;
+document.querySelectorAll(’.piw’).forEach(function(el){ el.style.aspectRatio = r; });
+}
+
+// ─── PRODUITS ────────────────────────────────────────────────────────────────
+function addProd(){
+var name  = (G(‘npn’).value || ‘’).trim();
+var cat   = (G(‘npc’).value || ‘’).trim();
+var price = (G(‘npp’).value || ‘’).trim();
+var badge = (G(‘npb’).value || ‘’).trim();
+if(!name || !price){ alert(‘Nom et prix requis.’); return; }
+var b = imgs[‘np’] || ‘’;
+var g = G(‘pgrid’);
+var c = document.createElement(‘div’); c.className = ‘pcard’;
+var esc = name.replace(/\/g, ‘\\’).replace(/’/g, “\’”);
+c.innerHTML = ‘<div class="piw">’
++ (b ? ‘<img src="' + b + '" alt="' + name + '" style="width:100%;height:100%;object-fit:cover;display:block">’
+: ‘<div class="iph">Photo a venir</div>’)
++ (badge ? ‘<span class="pbadge">’ + badge + ‘</span>’ : ‘’)
++ ‘</div><div class="pinf"><div class="pcat">’ + (cat || ‘Artisanat’) + ‘</div>’
++ ‘<div class="pname">’ + name + ‘</div><div class="pprice">’ + price + ‘</div>’
++ ‘<button class="pbtn" onclick="goOrd(\'' + esc + '\')">Commander</button></div>’;
+g.appendChild(c);
+if(!imgs._prods) imgs._prods = [];
+imgs._prods.push({ name:name, cat:cat, price:price, badge:badge, img:b });
+[‘npn’,‘npc’,‘npp’,‘npb’].forEach(function(id){ G(id).value = ‘’; });
+var p = G(‘npprev’); if(p) p.style.display = ‘none’;
+delete imgs[‘np’];
+alert(’”’ + name + ‘” ajoute !’);
+}
+
+// ─── COULEURS / SOCIAUX ──────────────────────────────────────────────────────
+function sCol(v, val){ document.documentElement.style.setProperty(v, val); }
+
+function apSoc(){
+var ig = (G(‘igurl’).value || ‘’).trim();
+var wa = (G(‘wafoot’).value || ‘’).replace(/\D/g, ‘’);
+if(ig) G(‘fig’).href = ig;
+if(wa) G(‘fwa’).href = ‘https://wa.me/’ + wa;
+}
+
+// ─── LANGUE ──────────────────────────────────────────────────────────────────
+var lang = ‘fr’;
+function tLang(){
+lang = (lang === ‘fr’) ? ‘en’ : ‘fr’;
+var t = { fr:{ sw:‘Passer en English’, btn:‘EN’ }, en:{ sw:‘Passer en Francais’, btn:‘FR’ } };
+G(‘lngbtn’).textContent = t[lang].btn;
+G(‘mlng’).textContent   = t[lang].btn;
+G(‘lsw’).textContent    = t[lang].sw;
+}
+
+// ─── COMMANDE ────────────────────────────────────────────────────────────────
+function goOrd(p){
+G(‘opf’).value = p;
+G(‘cmd’).scrollIntoView({ behavior:‘smooth’ });
+}
+function ordSub(e){
+e.preventDefault();
+G(‘omod’).style.display = ‘flex’;
+e.target.reset();
+return false;
+}
+function oclose(){ G(‘omod’).style.display = ‘none’; }
+
+// ─── MENU MOBILE ─────────────────────────────────────────────────────────────
+function mopen(){
+G(‘mmenu’).classList.add(‘on’);
+G(‘hbgel’).classList.add(‘on’);
+}
+function mclose(){
+G(‘mmenu’).classList.remove(‘on’);
+G(‘hbgel’).classList.remove(‘on’);
+}
+
+// ─── PUBLICATION GITHUB VIA NETLIFY FUNCTION ────────────────────────────────
+async function publish(){
+var repo   = (G(‘ghrepo’).value || ‘’).trim();
+var file   = (G(‘ghfile’).value || ‘index.html’).trim();
+var branch = (G(‘ghbranch’).value || ‘main’).trim();
+var m      = G(‘ghmsg’);
+if(!repo){ m.textContent = ‘Depot GitHub requis’; m.className = ‘msg err’; return; }
+localStorage.setItem(‘gda-ghrepo’, repo);
+localStorage.setItem(‘gda-ghfile’, file);
+localStorage.setItem(‘gda-ghbranch’, branch);
+showProg(0, ‘Preparation du HTML…’);
+var html = document.documentElement.outerHTML;
+html = ‘<!DOCTYPE html>\n’ + html;
+showProg(30, ‘Envoi vers la fonction Netlify…’);
+try {
+var res = await fetch(’/.netlify/functions/update-github’, {
+method: ‘POST’,
+headers: { ‘Content-Type’: ‘application/json’ },
+body: JSON.stringify({
+repo: repo, file: file, branch: branch,
+htmlContent: html,
+commitMessage: ’Mise a jour Galerie d Afrik - ’ + new Date().toLocaleString(‘fr-FR’)
+})
+});
+showProg(80, ‘Traitement GitHub…’);
+var data = await res.json();
+if(res.ok && data.success){
+showProg(100, ‘Publie !’);
+setTimeout(function(){
+hideProg();
+m.textContent = ‘Publie sur GitHub ! Netlify redeploie dans ~30s.’; m.className = ‘msg ok’;
+setTimeout(function(){ m.textContent = ‘’; }, 8000);
+}, 800);
+} else {
+hideProg();
+m.textContent = ’Erreur : ’ + (data.error || ‘inconnue’); m.className = ‘msg err’;
+}
+} catch(e) {
+hideProg();
+m.textContent = ’Erreur reseau : ’ + e.message; m.className = ‘msg err’;
+}
+}
+
+function showProg(pct, step){
+G(‘povl’).classList.add(‘on’);
+G(‘pbar’).style.width = pct + ‘%’;
+G(‘ppct’).textContent = pct + ‘%’;
+G(‘pstep’).textContent = step;
+}
+function hideProg(){ G(‘povl’).classList.remove(‘on’); }
+
+// ─── SAUVEGARDE LOCALE ───────────────────────────────────────────────────────
+var TIDS = [‘t1’,‘t2’,‘t3’,‘t4’,‘t5’,‘t6’,‘t7’,‘t8’,‘t9’,‘t10’,‘t11’,‘t12’,‘t13’,‘t14’,‘t15’,‘t16’,‘t17’,‘t18’,‘t19’,‘t20’,‘t21’,‘t22’,‘t23’,‘t24’,‘t25’,‘t26’,‘pn1’,‘pr1’,‘pn2’,‘pr2’,‘pn3’,‘pr3’,‘pc1’,‘pc2’,‘pc3’];
+
+function saveLoc(){
+try {
+var tx = {};
+TIDS.forEach(function(id){ var el=G(id); if(el) tx[id]=el.textContent; });
+var cfg = {
+tx: tx, lang: lang,
+sz:G(‘sz’).value, spx:G(‘spx’).value, spy:G(‘spy’).value, sdk:G(‘sdk’).value,
+vfit:G(‘vfit’).value, vpos:G(‘vpos’).value,
+ig:G(‘igurl’).value, wafoot:G(‘wafoot’).value, ratio:G(‘pratio’).value
+};
+localStorage.setItem(‘gda-cfg’, JSON.stringify(cfg));
+[‘h’,‘v’,‘p1’,‘p2’,‘p3’].forEach(function(k){
+if(imgs[k]){ try{ localStorage.setItem(‘gda-img-’+k, imgs[k]); }catch(e){ console.warn(‘img too large:’, k); } }
+});
+if(imgs._prods){ try{ localStorage.setItem(‘gda-prods’, JSON.stringify(imgs._prods)); }catch(e){} }
+alert(‘Sauvegarde effectuee !’);
+} catch(e){ alert(’Erreur: ’ + e.message); }
+}
+
+function rAll(){
+if(confirm(‘Reinitialiser toutes les modifications ?’)){
+[‘gda-cfg’,‘gda-img-h’,‘gda-img-v’,‘gda-img-p1’,‘gda-img-p2’,‘gda-img-p3’,‘gda-prods’,‘gda-pwd’,‘gda-wanum’,‘gda-waname’,‘gda-waauto’].forEach(function(k){ localStorage.removeItem(k); });
+location.reload();
+}
+}
+
+// ─── CHARGEMENT ──────────────────────────────────────────────────────────────
+window.addEventListener(‘load’, function(){
+loadWA();
+
+// Config GitHub
+var gr=localStorage.getItem(‘gda-ghrepo’), gf=localStorage.getItem(‘gda-ghfile’), gb=localStorage.getItem(‘gda-ghbranch’);
+if(gr) G(‘ghrepo’).value=gr;
+if(gf) G(‘ghfile’).value=gf;
+if(gb) G(‘ghbranch’).value=gb;
+
+// Images
+[‘h’,‘v’,‘p1’,‘p2’,‘p3’].forEach(function(k){
+var b = localStorage.getItem(‘gda-img-’+k);
+if(b){ imgs[k]=b; apImg(k,b); var p=G(k+‘prev’); if(p){ p.src=b; p.style.display=‘block’; } }
+});
+
+// Config
+var raw = localStorage.getItem(‘gda-cfg’);
+if(raw){
+try {
+var s = JSON.parse(raw);
+if(s.tx) Object.keys(s.tx).forEach(function(id){ var el=G(id); if(el) el.textContent=s.tx[id]; });
+if(s.sz)  G(‘sz’).value=s.sz;
+if(s.spx) G(‘spx’).value=s.spx;
+if(s.spy) G(‘spy’).value=s.spy;
+if(s.sdk) G(‘sdk’).value=s.sdk;
+uHero(); uOv();
+if(s.vfit) G(‘vfit’).value=s.vfit;
+if(s.vpos) G(‘vpos’).value=s.vpos;
+uVit();
+if(s.ig){ G(‘igurl’).value=s.ig; G(‘fig’).href=s.ig; }
+if(s.wafoot){ G(‘wafoot’).value=s.wafoot; G(‘fwa’).href=‘https://wa.me/’+s.wafoot.replace(/\D/g,’’); }
+if(s.ratio){ G(‘pratio’).value=s.ratio; uRatio(); }
+if(s.lang && s.lang !== ‘fr’) tLang();
+} catch(e){ console.warn(‘Load error:’, e); }
+}
+
+// Produits ajoutes
+var prods = localStorage.getItem(‘gda-prods’);
+if(prods){
+try {
+JSON.parse(prods).forEach(function(p){
+var g=G(‘pgrid’), c=document.createElement(‘div’); c.className=‘pcard’;
+var esc = p.name.replace(/\/g,’\\’).replace(/’/g,”\’”);
+c.innerHTML = ‘<div class="piw">’
++ (p.img ? ‘<img src="'+p.img+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:cover;display:block">’
+: ‘<div class="iph">Photo a venir</div>’)
++ (p.badge ? ‘<span class="pbadge">’+p.badge+’</span>’ : ‘’)
++ ‘</div><div class="pinf"><div class="pcat">’+(p.cat||‘Artisanat’)+’</div>’
++ ‘<div class="pname">’+p.name+’</div><div class="pprice">’+p.price+’</div>’
++ ‘<button class="pbtn" onclick="goOrd(\'' + esc + '\')">Commander</button></div>’;
+g.appendChild(c);
+});
+} catch(e){ console.warn(‘Produits error:’, e); }
+}
+});
+
+window.addEventListener(‘scroll’, function(){
+G(‘mainnav’).style.padding = window.scrollY > 60 ? ‘10px 60px’ : ‘18px 60px’;
+});
+
+</script>
+</body>
+</html>
